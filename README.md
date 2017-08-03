@@ -4,7 +4,7 @@
 
 This project is create for the comunity for the comunity
 
-This APP named AndroidDev you can found someone post about Android
+This APP named AndroidDev you can find some post about Android
 - Ask the stackoverflow
 - Post about libraries
 - Apport the comunity Android
