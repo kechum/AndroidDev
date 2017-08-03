@@ -22,7 +22,7 @@ etc.
   - Retrofit 2
   - Dagger 2
   - Storio
-  - MCP
+  - MVP
   - Patter repository
   - Singleton
   - Patter Observer
