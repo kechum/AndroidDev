@@ -29,11 +29,6 @@ etc.
   - Clean Architecture
 
 
-### Todos
-
- - Write MOAR Tests
- - Add Night Mode
-
 License
 ----
 
