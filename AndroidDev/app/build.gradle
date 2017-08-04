@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
 
 android {
     compileSdkVersion 25
@@ -24,7 +27,34 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+
+    compile glideDependencies.glide
+    compile googleDependecies.gson
+    compile retrofitDependencies.retrofit
+    compile retrofitDependencies.adapter
+    compile retrofitDependencies.converter
+    compile retrofitDependencies.scalars
+
+    compile rxandroidDependencies.rxandroid
+    compile rxjavaDependencies.rxJava
+
+
+    compile butterknifeDependencies.butterknife
+
+    compile daggerDependencies.dagger
+
+
+    compile recyclerDependencies.cardview
+    compile recyclerDependencies.gridlayout
+    compile recyclerDependencies.recycler
+
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+
+    apt 'com.google.dagger:dagger-compiler:2.9'
+    provided 'javax.annotation:jsr250-api:1.0'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
 }
