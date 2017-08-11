@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.tutorials.hackro.androiddev.BuildConfig;
 
 import java.util.concurrent.TimeUnit;
 
@@ -64,7 +65,7 @@ public class AndroidDevModule {
         //OkHttpClient.Builder client = new OkHttpClient.Builder();
 
         OkHttpClient client = new OkHttpClient.Builder()
-                //.connectTimeout(15, TimeUnit.SECONDS)
+                .connectTimeout(15, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS).build();
 
         //client.cache(cache);
@@ -97,8 +98,7 @@ public class AndroidDevModule {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
-                //.baseUrl(BuildConfig.BASE_URL)
-                .baseUrl("")
+                .baseUrl(BuildConfig.BASE_URL)
                 .client(okHttpClient)
                 .build();
     }
