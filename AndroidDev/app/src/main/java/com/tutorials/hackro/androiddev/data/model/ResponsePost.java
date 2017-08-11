@@ -76,4 +76,13 @@ public class ResponsePost implements Serializable
         this.body = body;
     }
 
+    @Override
+    public String toString() {
+        return "ResponsePost{" +
+                "userId=" + userId +
+                ", id=" + id +
+                ", title='" + title + '\'' +
+                ", body='" + body + '\'' +
+                '}';
+    }
 }

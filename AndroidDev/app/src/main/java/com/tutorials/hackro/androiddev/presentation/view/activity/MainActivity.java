@@ -1,5 +1,6 @@
 package com.tutorials.hackro.androiddev.presentation.view.activity;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.tutorials.hackro.androiddev.R;
@@ -42,16 +43,23 @@ public class MainActivity extends BaseActivity implements MainPresenter.View{
     public void methodAMainActivity() {
         Toast.makeText(this,"Hola Ali",Toast.LENGTH_SHORT).show();
     }
+
     @Override
-    public void methodBMainActivity() {
+    public void showPosts(String responsePost) {
+        Toast.makeText(this,responsePost.toString() ,Toast.LENGTH_SHORT).show();
+
     }
+
     @Override
     public void showLoading() {
+        Log.e("hide ","Progress");
     }
     @Override
     public void hideLoading() {
+        Log.e("hide ","Progress");
     }
     @Override
     public void showError(String message) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 }
