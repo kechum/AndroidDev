@@ -3,9 +3,11 @@ package com.tutorials.hackro.androiddev.presentation.view.presenter;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
+import com.tutorials.hackro.androiddev.data.model.ResponsePhoto;
 import com.tutorials.hackro.androiddev.data.model.ResponsePost;
 import com.tutorials.hackro.androiddev.domain.DefaultSubscriber;
-import com.tutorials.hackro.androiddev.domain.GetListPost;
+import com.tutorials.hackro.androiddev.domain.usecase.GetListPhotos;
+import com.tutorials.hackro.androiddev.domain.usecase.GetListPost;
 
 import java.util.List;
 
@@ -18,12 +20,14 @@ import javax.inject.Inject;
 public class MainPresenter extends  Presenter<MainPresenter.View>{
 
     private SharedPreferences sharedPreferences;
+    private GetListPhotos getListPhotos;
     private GetListPost getListPost;
 
     @Inject
-    public MainPresenter(SharedPreferences sharedPreferences,@NonNull GetListPost getListPost){
+    public MainPresenter(SharedPreferences sharedPreferences,@NonNull GetListPost getListPost,@NonNull GetListPhotos getListPhotos){
         this.sharedPreferences = sharedPreferences;
         this.getListPost = getListPost;
+        this.getListPhotos = getListPhotos;
     }
 
 
@@ -31,10 +35,31 @@ public class MainPresenter extends  Presenter<MainPresenter.View>{
     public void initialize() {
         super.initialize();
         getView().methodAMainActivity();
-        getListPost();
+        //getListPost();
+        listPhotos();
     }
 
+    private void listPhotos() {
+        getListPhotos.execute(new GetListPhotosObservable());
+    }
 
+    private class  GetListPhotosObservable extends  DefaultSubscriber<List<ResponsePhoto>>{
+        @Override
+        public void onCompleted() {
+            super.onCompleted();
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            super.onError(e);
+        }
+
+        @Override
+        public void onNext(List<ResponsePhoto> responsePhoto) {
+            super.onNext(responsePhoto);
+            getView().showListPhotos(responsePhoto);
+        }
+    }
 
     public void getListPost(){
         getView().showLoading();
@@ -69,9 +94,18 @@ public class MainPresenter extends  Presenter<MainPresenter.View>{
         }
     }
 
+
+    @Override
+    public void onItemOnClick(ResponsePhoto responsePhoto) {
+        super.onItemOnClick(responsePhoto);
+        getView().showPhotoDetail(responsePhoto.toString());
+    }
+
     public interface View extends Presenter.View{
         void methodAMainActivity();
         void showPosts(String responseString);
+        void showPhotoDetail(String details);
+        void showListPhotos(List<ResponsePhoto> photoList);
     }
 
 

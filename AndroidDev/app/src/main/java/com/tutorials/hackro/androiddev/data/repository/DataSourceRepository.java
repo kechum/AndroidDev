@@ -1,5 +1,6 @@
 package com.tutorials.hackro.androiddev.data.repository;
 
+import com.tutorials.hackro.androiddev.data.model.ResponsePhoto;
 import com.tutorials.hackro.androiddev.data.model.ResponsePost;
 
 import java.util.List;
@@ -13,5 +14,6 @@ import rx.Observable;
 public interface DataSourceRepository {
 
     Observable<List<ResponsePost>> getListPost();
+    Observable<List<ResponsePhoto>> getListPhotos();
 
 }

@@ -1,5 +1,6 @@
 package com.tutorials.hackro.androiddev.data.repository;
 
+import com.tutorials.hackro.androiddev.data.model.ResponsePhoto;
 import com.tutorials.hackro.androiddev.data.model.ResponsePost;
 import com.tutorials.hackro.androiddev.data.remote.DataRemote;
 
@@ -30,6 +31,11 @@ public class AppRepository implements DataSourceRepository {
     @Override
     public Observable<List<ResponsePost>> getListPost() {
         return dataRemote.getListPost();
+    }
+
+    @Override
+    public Observable<List<ResponsePhoto>> getListPhotos() {
+        return dataRemote.getListPhotos();
     }
 
 }

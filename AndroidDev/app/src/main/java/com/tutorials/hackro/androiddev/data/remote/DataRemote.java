@@ -2,6 +2,7 @@ package com.tutorials.hackro.androiddev.data.remote;
 
 import android.support.annotation.NonNull;
 
+import com.tutorials.hackro.androiddev.data.model.ResponsePhoto;
 import com.tutorials.hackro.androiddev.data.model.ResponsePost;
 import com.tutorials.hackro.androiddev.data.repository.DataSourceRepository;
 
@@ -28,5 +29,10 @@ public class DataRemote implements DataSourceRepository {
     @Override
     public Observable<List<ResponsePost>> getListPost() {
         return retrofit.create(RetrofitServices.class).getListPost();
+    }
+
+    @Override
+    public Observable<List<ResponsePhoto>> getListPhotos() {
+        return retrofit.create(RetrofitServices.class).getListPhotos();
     }
 }

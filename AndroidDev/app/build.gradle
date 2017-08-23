@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 
@@ -16,6 +17,7 @@ android {
 
         buildConfigField "String", "BASE_URL", "\"https://jsonplaceholder.typicode.com/\""
         buildConfigField "String", "ENDPOINT_POST", "\"/posts\""
+        buildConfigField "String", "ENDPOINT_PHOTOS", "\"/photos\""
 
 
     }
@@ -58,6 +60,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+    apt 'com.jakewharton:butterknife-compiler:8.2.1'
 
     apt 'com.google.dagger:dagger-compiler:2.9'
     provided 'javax.annotation:jsr250-api:1.0'

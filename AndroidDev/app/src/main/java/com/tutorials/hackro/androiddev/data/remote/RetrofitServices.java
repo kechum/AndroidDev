@@ -1,6 +1,7 @@
 package com.tutorials.hackro.androiddev.data.remote;
 
 import com.tutorials.hackro.androiddev.BuildConfig;
+import com.tutorials.hackro.androiddev.data.model.ResponsePhoto;
 import com.tutorials.hackro.androiddev.data.model.ResponsePost;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface RetrofitServices {
     @GET(BuildConfig.ENDPOINT_POST)
     Observable<List<ResponsePost>> getListPost();
 
+    @GET(BuildConfig.ENDPOINT_PHOTOS)
+    Observable<List<ResponsePhoto>> getListPhotos();
 }
