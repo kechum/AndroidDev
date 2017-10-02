@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.tutorials.hackro.androiddev.data.model.ResponsePhoto;
 import com.tutorials.hackro.androiddev.data.model.ResponsePost;
-import com.tutorials.hackro.androiddev.data.repository.DataSourceRepository;
+import com.tutorials.hackro.androiddev.data.model.ResponseUser;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import rx.Observable;
  * Created by hackro on 10/08/17.
  */
 // this class is use in AppRepository
-public class DataRemote implements DataSourceRepository {
+public class DataRemote implements DataSourceRemote {
 
     private Retrofit retrofit;
 
@@ -34,5 +34,10 @@ public class DataRemote implements DataSourceRepository {
     @Override
     public Observable<List<ResponsePhoto>> getListPhotos() {
         return retrofit.create(RetrofitServices.class).getListPhotos();
+    }
+
+    @Override
+    public Observable<List<ResponseUser>> getListUsers() {
+        return retrofit.create(RetrofitServices.class).getListUsers();
     }
 }

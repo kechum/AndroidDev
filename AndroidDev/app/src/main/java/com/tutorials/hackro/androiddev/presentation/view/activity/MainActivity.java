@@ -10,6 +10,7 @@ import com.tutorials.hackro.androiddev.data.model.ResponsePhoto;
 import com.tutorials.hackro.androiddev.presentation.BaseActivity;
 import com.tutorials.hackro.androiddev.presentation.HomeApplication;
 import com.tutorials.hackro.androiddev.presentation.adapter.PhotosAdapter;
+import com.tutorials.hackro.androiddev.presentation.view.entity.ResponseUserPresentation;
 import com.tutorials.hackro.androiddev.presentation.view.presenter.MainPresenter;
 
 import java.util.List;
@@ -85,6 +86,12 @@ public class MainActivity extends BaseActivity implements MainPresenter.View{
     public void showListPhotos(List<ResponsePhoto> photoList) {
         photosAdapter.setListPhotos(photoList);
         photosAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showListUsers(List<ResponseUserPresentation> listUsers) {
+        Log.e("results users:       ",listUsers.toString());
+        Toast.makeText(this,listUsers.toString(),Toast.LENGTH_SHORT).show();
     }
 
     @Override

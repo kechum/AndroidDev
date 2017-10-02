@@ -1,8 +1,13 @@
 package com.tutorials.hackro.androiddev.data.repository;
 
-import com.tutorials.hackro.androiddev.data.model.ResponsePhoto;
+import android.support.annotation.NonNull;
+
 import com.tutorials.hackro.androiddev.data.model.ResponsePost;
 import com.tutorials.hackro.androiddev.data.remote.DataRemote;
+import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponsePhoto;
+import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponseUser;
+import com.tutorials.hackro.androiddev.domain.Model.ResponsePhotoDomain;
+import com.tutorials.hackro.androiddev.domain.Model.ResponseUserDomain;
 
 import java.util.List;
 
@@ -20,12 +25,15 @@ public class AppRepository implements DataSourceRepository {
 
     //Local
     //Remote
-
+    private MapperResponsePhoto mapperPhoto;
+    private MapperResponseUser mapperUser;
     private DataRemote dataRemote;
 
     @Inject
-    public AppRepository(DataRemote dataRemote) {
+    public AppRepository(@NonNull DataRemote dataRemote,@NonNull  MapperResponsePhoto mapperPhoto,@NonNull MapperResponseUser mapperUser) {
         this.dataRemote = dataRemote;
+        this.mapperPhoto = mapperPhoto;
+        this.mapperUser = mapperUser;
     }
 
     @Override
@@ -34,8 +42,13 @@ public class AppRepository implements DataSourceRepository {
     }
 
     @Override
-    public Observable<List<ResponsePhoto>> getListPhotos() {
-        return dataRemote.getListPhotos();
+    public Observable<List<ResponsePhotoDomain>> getListPhotos() {
+        return dataRemote.getListPhotos().map(photo -> mapperPhoto.map(photo));
+    }
+
+    @Override
+    public Observable<List<ResponseUserDomain>> getListUsers() {
+        return dataRemote.getListUsers().map(user ->  mapperUser.map(user));
     }
 
 }

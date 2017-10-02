@@ -8,6 +8,9 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.tutorials.hackro.androiddev.BuildConfig;
+import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponsePhoto;
+import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponseUser;
+import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseUserPresentation;
 
 import java.util.concurrent.TimeUnit;
 
@@ -101,6 +104,27 @@ public class AndroidDevModule {
                 .baseUrl(BuildConfig.BASE_URL)
                 .client(okHttpClient)
                 .build();
+    }
+
+
+    @Provides
+    @Singleton
+    MapperResponsePhoto provideMapperResponsePhoto(){
+        return new MapperResponsePhoto();
+    }
+
+    @Provides
+    @Singleton
+    MapperResponseUser provideMapperResponseUser(){
+        return new MapperResponseUser();
+    }
+
+
+
+    @Provides
+    @Singleton
+    MapperResponseUserPresentation provideMapperResponseUserPresentation(){
+        return new MapperResponseUserPresentation();
     }
 
 
