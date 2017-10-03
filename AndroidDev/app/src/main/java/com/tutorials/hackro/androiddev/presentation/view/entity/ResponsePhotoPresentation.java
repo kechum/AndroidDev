@@ -1,4 +1,4 @@
-package com.tutorials.hackro.androiddev.domain.Model;
+package com.tutorials.hackro.androiddev.presentation.view.entity;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by hackro on 22/08/17.
  */
 
-public class ResponsePhotoDomain implements Serializable
+public class ResponsePhotoPresentation implements Serializable
 {
 
     @SerializedName("albumId")
@@ -29,10 +29,10 @@ public class ResponsePhotoDomain implements Serializable
     private String thumbnailUrl;
     private final static long serialVersionUID = -2612582341201098126L;
 
-    public ResponsePhotoDomain() {
+    public ResponsePhotoPresentation() {
     }
 
-    public ResponsePhotoDomain(long albumId, long id, String title, String url, String thumbnailUrl) {
+    public ResponsePhotoPresentation(long albumId, long id, String title, String url, String thumbnailUrl) {
         this.albumId = albumId;
         this.id = id;
         this.title = title;

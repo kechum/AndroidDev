@@ -14,7 +14,7 @@ import rx.Observable;
  * Created by hackro on 10/08/17.
  */
 // this interface is use in DataRemote
-public interface RetrofitServices {
+public interface RetrofitServicesJsonPlaceHolder {
 
     /**
      *

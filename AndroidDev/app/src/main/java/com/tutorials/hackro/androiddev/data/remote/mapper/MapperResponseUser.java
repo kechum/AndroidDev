@@ -3,9 +3,9 @@ package com.tutorials.hackro.androiddev.data.remote.mapper;
 import com.tutorials.hackro.androiddev.data.model.ResponseUser;
 import com.tutorials.hackro.androiddev.data.model.User.AddressUser;
 import com.tutorials.hackro.androiddev.data.model.User.Company;
-import com.tutorials.hackro.androiddev.domain.Model.ResponseUserDomain;
-import com.tutorials.hackro.androiddev.domain.Model.User.AddressUserDomain;
-import com.tutorials.hackro.androiddev.domain.Model.User.CompanyDomain;
+import com.tutorials.hackro.androiddev.domain.model.ResponseUserDomain;
+import com.tutorials.hackro.androiddev.domain.model.User.AddressUserDomain;
+import com.tutorials.hackro.androiddev.domain.model.User.CompanyDomain;
 
 /**
  * Created by hackro on 1/10/17.

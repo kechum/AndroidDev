@@ -4,15 +4,16 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.tutorials.hackro.androiddev.data.model.ResponsePhoto;
 import com.tutorials.hackro.androiddev.data.model.ResponsePost;
 import com.tutorials.hackro.androiddev.domain.DefaultSubscriber;
-import com.tutorials.hackro.androiddev.domain.Model.ResponsePhotoDomain;
-import com.tutorials.hackro.androiddev.domain.Model.ResponseUserDomain;
+import com.tutorials.hackro.androiddev.domain.model.ResponsePhotoDomain;
+import com.tutorials.hackro.androiddev.domain.model.ResponseUserDomain;
 import com.tutorials.hackro.androiddev.domain.usecase.GetListPhotos;
 import com.tutorials.hackro.androiddev.domain.usecase.GetListPost;
 import com.tutorials.hackro.androiddev.domain.usecase.GetListUsers;
+import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponsePhotoPresentation;
 import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseUserPresentation;
+import com.tutorials.hackro.androiddev.presentation.view.entity.ResponsePhotoPresentation;
 import com.tutorials.hackro.androiddev.presentation.view.entity.ResponseUserPresentation;
 
 import java.util.List;
@@ -29,15 +30,17 @@ public class MainPresenter extends  Presenter<MainPresenter.View>{
     private GetListPhotos getListPhotos;
     private GetListPost getListPost;
     private GetListUsers getListUsers;
-    private MapperResponseUserPresentation mapperUserPresentation;
 
+    private MapperResponseUserPresentation mapperUser;
+    private MapperResponsePhotoPresentation mapperPhoto;
     @Inject
-    public MainPresenter(SharedPreferences sharedPreferences,@NonNull GetListPost getListPost,@NonNull GetListPhotos getListPhotos,@NonNull GetListUsers getListUsers,@NonNull MapperResponseUserPresentation mapperUserPresentation){
+    public MainPresenter(SharedPreferences sharedPreferences,@NonNull GetListPost getListPost,@NonNull GetListPhotos getListPhotos,@NonNull GetListUsers getListUsers,@NonNull MapperResponseUserPresentation mapperUser,@NonNull MapperResponsePhotoPresentation mapperPhoto){
         this.sharedPreferences = sharedPreferences;
         this.getListPost = getListPost;
         this.getListPhotos = getListPhotos;
         this.getListUsers = getListUsers;
-        this.mapperUserPresentation = mapperUserPresentation;
+        this.mapperUser = mapperUser;
+        this.mapperPhoto = mapperPhoto;
     }
 
 
@@ -46,8 +49,8 @@ public class MainPresenter extends  Presenter<MainPresenter.View>{
         super.initialize();
         getView().methodAMainActivity();
         //getListPost();
-        //listPhotos();
-        listUsers();
+        listPhotos();
+        //listUsers();
     }
 
     private void listUsers() {
@@ -69,7 +72,7 @@ public class MainPresenter extends  Presenter<MainPresenter.View>{
         public void onNext(List<ResponseUserDomain> responseUserDomains) {
             super.onNext(responseUserDomains);
 
-            List<ResponseUserPresentation> listUsers = mapperUserPresentation.map(responseUserDomains);
+            List<ResponseUserPresentation> listUsers = mapperUser.map(responseUserDomains);
             getView().showListUsers(listUsers);
             Log.e("size list Users: ", String.valueOf(listUsers.size()));
         }
@@ -93,8 +96,7 @@ public class MainPresenter extends  Presenter<MainPresenter.View>{
         @Override
         public void onNext(List<ResponsePhotoDomain> responsePhoto) {
             super.onNext(responsePhoto);
-
-            //getView().showListPhotos(responsePhoto);
+            getView().showListPhotos(mapperPhoto.map(responsePhoto));
         }
     }
 
@@ -132,9 +134,8 @@ public class MainPresenter extends  Presenter<MainPresenter.View>{
     }
 
 
-    @Override
-    public void onItemOnClick(ResponsePhoto responsePhoto) {
-        super.onItemOnClick(responsePhoto);
+
+    public void onItemOnClick(ResponsePhotoPresentation responsePhoto) {
         getView().showPhotoDetail(responsePhoto.toString());
     }
 
@@ -142,8 +143,7 @@ public class MainPresenter extends  Presenter<MainPresenter.View>{
         void methodAMainActivity();
         void showPosts(String responseString);
         void showPhotoDetail(String details);
-        void showListPhotos(List<ResponsePhoto> photoList);
-
+        void showListPhotos(List<ResponsePhotoPresentation> photoList);
         void showListUsers(List<ResponseUserPresentation> listUsers);
     }
 

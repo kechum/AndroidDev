@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tutorials.hackro.androiddev.R;
-import com.tutorials.hackro.androiddev.data.model.ResponsePhoto;
-import com.tutorials.hackro.androiddev.presentation.view.presenter.Presenter;
+import com.tutorials.hackro.androiddev.presentation.view.entity.ResponsePhotoPresentation;
+import com.tutorials.hackro.androiddev.presentation.view.presenter.MainPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +18,11 @@ import java.util.List;
 
 public class PhotosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<ResponsePhoto> listPhotos;
-    private Presenter presenter;
+    private List<ResponsePhotoPresentation> listPhotos;
+    private MainPresenter presenter;
 
 
-    public PhotosAdapter(Presenter presenter) {
+    public PhotosAdapter(MainPresenter presenter) {
         listPhotos = new ArrayList<>();
         this.presenter = presenter;
     }
@@ -44,7 +44,7 @@ public class PhotosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return listPhotos.size();
     }
 
-    public void setListPhotos(List<ResponsePhoto> listPhotos) {
+    public void setListPhotos(List<ResponsePhotoPresentation> listPhotos) {
         this.listPhotos = listPhotos;
     }
 }

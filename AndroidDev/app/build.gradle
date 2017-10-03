@@ -16,6 +16,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "BASE_URL", "\"https://jsonplaceholder.typicode.com/\""
+
         buildConfigField "String", "ENDPOINT_POST", "\"/posts\""
         buildConfigField "String", "ENDPOINT_PHOTOS", "\"/photos\""
         buildConfigField "String", "ENDPOINT_USERS","\"/users\""

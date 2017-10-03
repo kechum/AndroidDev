@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.tutorials.hackro.androiddev.R;
-import com.tutorials.hackro.androiddev.data.model.ResponsePhoto;
-import com.tutorials.hackro.androiddev.presentation.view.presenter.Presenter;
+import com.tutorials.hackro.androiddev.presentation.view.entity.ResponsePhotoPresentation;
+import com.tutorials.hackro.androiddev.presentation.view.presenter.MainPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,18 +20,17 @@ import butterknife.ButterKnife;
 
 public class PhotosViewHolder  extends RecyclerView.ViewHolder{
 
-    @BindView(R.id.title)
-    TextView title;
-
-    @BindView(R.id.album)
-    TextView album;
-
-    @BindView(R.id.photo)
-    ImageView photo;
+    private MainPresenter presenter;
 
     private View itemView;
 
-    public PhotosViewHolder(View itemView,Presenter presenter) {
+    @BindView(R.id.title) TextView title;
+
+    @BindView(R.id.album) TextView album;
+
+    @BindView(R.id.photo) ImageView photo;
+
+    public PhotosViewHolder(View itemView,MainPresenter presenter) {
         super(itemView);
         this.itemView = itemView;
         this.presenter = presenter;
@@ -39,7 +38,7 @@ public class PhotosViewHolder  extends RecyclerView.ViewHolder{
     }
 
 
-    public void renderView(ResponsePhoto responsePhoto){
+    public void renderView(ResponsePhotoPresentation responsePhoto){
         onItemOnClick(responsePhoto);
         renderTitle(responsePhoto.getTitle()!=null?responsePhoto.getTitle():"");
         renderAlbum(String.valueOf(responsePhoto.getAlbumId()));
@@ -49,7 +48,7 @@ public class PhotosViewHolder  extends RecyclerView.ViewHolder{
     private void renderImage(String thumbnailUrl) {
         Glide.with(getContext())
                 .load(thumbnailUrl)
-                .placeholder(R.mipmap.ic_launcher_round)
+                .placeholder(R.mipmap.load_image)
                 .skipMemoryCache(true)
                 .into(photo);
     }
@@ -62,14 +61,13 @@ public class PhotosViewHolder  extends RecyclerView.ViewHolder{
         this.title.setText(title);
     }
 
-    private Presenter presenter;
 
     private Context getContext(){
         return itemView.getContext();
     }
 
 
-    private void onItemOnClick(final ResponsePhoto responsePhoto){
+    private void onItemOnClick(final ResponsePhotoPresentation responsePhoto){
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

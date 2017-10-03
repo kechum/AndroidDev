@@ -1,7 +1,7 @@
 package com.tutorials.hackro.androiddev.data.remote.mapper;
 
 import com.tutorials.hackro.androiddev.data.model.ResponsePhoto;
-import com.tutorials.hackro.androiddev.domain.Model.ResponsePhotoDomain;
+import com.tutorials.hackro.androiddev.domain.model.ResponsePhotoDomain;
 
 /**
  * Created by hackro on 1/10/17.

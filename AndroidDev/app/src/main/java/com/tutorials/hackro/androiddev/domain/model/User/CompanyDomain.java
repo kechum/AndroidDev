@@ -1,4 +1,4 @@
-package com.tutorials.hackro.androiddev.domain.Model.User;
+package com.tutorials.hackro.androiddev.domain.model.User;
 
 
 import com.google.gson.annotations.Expose;

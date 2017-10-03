@@ -1,9 +1,9 @@
-package com.tutorials.hackro.androiddev.domain.Model;
+package com.tutorials.hackro.androiddev.domain.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.tutorials.hackro.androiddev.domain.Model.User.AddressUserDomain;
-import com.tutorials.hackro.androiddev.domain.Model.User.CompanyDomain;
+import com.tutorials.hackro.androiddev.domain.model.User.AddressUserDomain;
+import com.tutorials.hackro.androiddev.domain.model.User.CompanyDomain;
 
 import java.io.Serializable;
 

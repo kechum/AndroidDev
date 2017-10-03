@@ -1,8 +1,8 @@
 package com.tutorials.hackro.androiddev.data.repository;
 
 import com.tutorials.hackro.androiddev.data.model.ResponsePost;
-import com.tutorials.hackro.androiddev.domain.Model.ResponsePhotoDomain;
-import com.tutorials.hackro.androiddev.domain.Model.ResponseUserDomain;
+import com.tutorials.hackro.androiddev.domain.model.ResponsePhotoDomain;
+import com.tutorials.hackro.androiddev.domain.model.ResponseUserDomain;
 
 import java.util.List;
 

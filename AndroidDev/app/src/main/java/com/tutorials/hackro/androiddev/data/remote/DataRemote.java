@@ -28,16 +28,16 @@ public class DataRemote implements DataSourceRemote {
 
     @Override
     public Observable<List<ResponsePost>> getListPost() {
-        return retrofit.create(RetrofitServices.class).getListPost();
+        return retrofit.create(RetrofitServicesJsonPlaceHolder.class).getListPost();
     }
 
     @Override
     public Observable<List<ResponsePhoto>> getListPhotos() {
-        return retrofit.create(RetrofitServices.class).getListPhotos();
+        return retrofit.create(RetrofitServicesJsonPlaceHolder.class).getListPhotos();
     }
 
     @Override
     public Observable<List<ResponseUser>> getListUsers() {
-        return retrofit.create(RetrofitServices.class).getListUsers();
+        return retrofit.create(RetrofitServicesJsonPlaceHolder.class).getListUsers();
     }
 }

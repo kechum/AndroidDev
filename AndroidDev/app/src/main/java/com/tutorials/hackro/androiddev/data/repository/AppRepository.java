@@ -6,8 +6,8 @@ import com.tutorials.hackro.androiddev.data.model.ResponsePost;
 import com.tutorials.hackro.androiddev.data.remote.DataRemote;
 import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponsePhoto;
 import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponseUser;
-import com.tutorials.hackro.androiddev.domain.Model.ResponsePhotoDomain;
-import com.tutorials.hackro.androiddev.domain.Model.ResponseUserDomain;
+import com.tutorials.hackro.androiddev.domain.model.ResponsePhotoDomain;
+import com.tutorials.hackro.androiddev.domain.model.ResponseUserDomain;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package com.tutorials.hackro.androiddev.presentation.mapper;
 
 import com.tutorials.hackro.androiddev.data.remote.mapper.Mapper;
-import com.tutorials.hackro.androiddev.domain.Model.ResponseUserDomain;
-import com.tutorials.hackro.androiddev.domain.Model.User.AddressUserDomain;
-import com.tutorials.hackro.androiddev.domain.Model.User.CompanyDomain;
+import com.tutorials.hackro.androiddev.domain.model.ResponseUserDomain;
+import com.tutorials.hackro.androiddev.domain.model.User.AddressUserDomain;
+import com.tutorials.hackro.androiddev.domain.model.User.CompanyDomain;
 import com.tutorials.hackro.androiddev.presentation.view.entity.ResponseUserPresentation;
 import com.tutorials.hackro.androiddev.presentation.view.entity.User.AddressUserPresentation;
 import com.tutorials.hackro.androiddev.presentation.view.entity.User.CompanyPresentation;

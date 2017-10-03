@@ -10,6 +10,9 @@ import com.google.gson.GsonBuilder;
 import com.tutorials.hackro.androiddev.BuildConfig;
 import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponsePhoto;
 import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponseUser;
+import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponseUserFake;
+import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponsePhotoPresentation;
+import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseUserFakePresentation;
 import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseUserPresentation;
 
 import java.util.concurrent.TimeUnit;
@@ -128,6 +131,24 @@ public class AndroidDevModule {
     }
 
 
+
+    @Provides
+    @Singleton
+    MapperResponsePhotoPresentation provideMapperResponsePhotoPresentation(){
+        return new MapperResponsePhotoPresentation();
+    }
+
+    @Provides
+    @Singleton
+    MapperResponseUserFake provideMapperResponseUserFake(){
+        return new MapperResponseUserFake();
+    }
+
+    @Provides
+    @Singleton
+    MapperResponseUserFakePresentation provideMapperResponseUserFakePresentation(){
+        return new MapperResponseUserFakePresentation();
+    }
 
 
 
