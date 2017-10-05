@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../services/post.service';
+import { AppError } from "../../common/app-error";
 
 @Component({
   selector: 'posts',
@@ -8,12 +9,14 @@ import { PostService } from '../../services/post.service';
 })
 export class PostsComponent implements OnInit {
   posts: any[];
+  errortext;
   constructor(private service: PostService) { }
 
   ngOnInit() {
     this.service.getPosts()
-      .subscribe(response =>{
-        this.posts = response.json();
+      .subscribe(posts => this.posts = posts, 
+      (error: AppError) => {
+        this.errortext = 'Ha ocurrido un error';
       });
   }
 
