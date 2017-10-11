@@ -10,11 +10,12 @@ import { AppError } from "../../common/app-error";
 export class PostsComponent implements OnInit {
   posts: any[];
   errortext;
+  p: number = 1;
   constructor(private service: PostService) { }
 
   ngOnInit() {
     this.service.getPosts()
-      .subscribe(posts => this.posts = posts, 
+      .subscribe(posts => this.posts = posts,
       (error: AppError) => {
         this.errortext = 'Ha ocurrido un error';
       });
