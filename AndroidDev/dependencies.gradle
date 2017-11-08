@@ -1,7 +1,7 @@
 ext{
 
 
-    appcompatVersion = '25.0.1'
+    appcompatVersion = '25.3.1'
 
     appcompatDependencies = [
             appcompat   :   "com.android.support:appcompat-v7:${appcompatVersion}",
@@ -61,9 +61,6 @@ ext{
             recycler :   "com.android.support:recyclerview-v7:${recyclerVersion}"
     ]
 
-
-
-
     daggerVersion = '2.9'
     daggerDependencies = [
             dagger   : "com.google.dagger:dagger:${daggerVersion}"
@@ -74,6 +71,11 @@ ext{
     gmsDependencies = [
             gms : "com.google.gms:google-services:${gmsVersion}"
     ]
+
+    othersDependencies = [
+            crashlytics :"com.crashlytics.sdk.android:crashlytics:2.6.8@aar"
+    ]
+
 
 
 }

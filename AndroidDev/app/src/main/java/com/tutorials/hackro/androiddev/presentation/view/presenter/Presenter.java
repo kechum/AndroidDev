@@ -23,7 +23,7 @@ public class Presenter<T extends Presenter.View> {
         void showProgres();
         void hideProgress();
         void showError(String message);
-        void setValuesFabric();
+        void setValuesFabric();//add this events because i have error in the ui before presenter and a i need send the values
     }
 }
 

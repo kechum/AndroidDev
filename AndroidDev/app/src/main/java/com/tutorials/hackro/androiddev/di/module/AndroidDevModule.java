@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.tutorials.hackro.androiddev.BuildConfig;
 import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponseUserFake;
+import com.tutorials.hackro.androiddev.presentation.Utils.AssetsPropertyReader;
 import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponsePhotoPresentation;
 import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseUserFakePresentation;
 import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseUserPresentation;
@@ -120,6 +121,11 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
     }
 
 
+    @Singleton
+    @Provides
+    AssetsPropertyReader providesAssetsPropertyReader(Application application){
+        return new AssetsPropertyReader(application);
+    }
 
 
 

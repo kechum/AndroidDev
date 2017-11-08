@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.tutorials.hackro.androiddev.BuildConfig;
 import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponseUserFake;
 import com.tutorials.hackro.androiddev.domain.model.ResponseUserFakeDomain;
+import com.tutorials.hackro.androiddev.presentation.Utils.AssetsPropertyReader;
 
 import java.util.List;
 
@@ -21,14 +22,14 @@ public class DataRemote implements DataSourceRemote {
 
     private Retrofit retrofit;
     private MapperResponseUserFake mapperResponseUserFake;
-
-    @Inject public DataRemote(@NonNull Retrofit retrofit,@NonNull MapperResponseUserFake mapperResponseUserFake) {
+    private AssetsPropertyReader assetsPropertyReader;
+    @Inject public DataRemote(@NonNull Retrofit retrofit,@NonNull MapperResponseUserFake mapperResponseUserFake,@NonNull AssetsPropertyReader assetsPropertyReader) {
         this.retrofit = retrofit;
         this.mapperResponseUserFake = mapperResponseUserFake;
+        this.assetsPropertyReader = assetsPropertyReader;
     }
 
-
     @Override public Observable<ResponseUserFakeDomain> getListResult() {
-        return retrofit.create(RetrofitServicesJsonPlaceHolder.class).getListResult(BuildConfig.NUMBER_RESULT).map(responseUserFakeDatas -> mapperResponseUserFake.map(responseUserFakeDatas));
+        return retrofit.create(RetrofitServicesJsonPlaceHolder.class).getListResult(assetsPropertyReader.getProperties(BuildConfig.PROPERTIES_FILE).getProperty(BuildConfig.NUMBER_RESULT)).map(responseUserFakeDatas -> mapperResponseUserFake.map(responseUserFakeDatas));
     }
 }

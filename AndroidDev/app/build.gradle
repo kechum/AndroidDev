@@ -1,10 +1,18 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 
 
+
 android {
+    signingConfigs {
+        TutorialsHackro {
+            keyAlias 'TutorialsHackro'
+            keyPassword 'TutorialsHackro'
+            storePassword 'TutorialsHackro'
+            storeFile file('/Users/macbookpro/Desktop/TutorialsHackro.jks')
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
@@ -14,62 +22,66 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
         buildConfigField "String", "BASE_URL", "\"https://randomuser.me/\""
         buildConfigField "String", "BASE_API", "\"api/\""
         buildConfigField "String", "API_PARAMETER", "\"results\""
-
-
-        //Values API
-        buildConfigField "String", "NUMBER_RESULT", "\"4500\""
-
+        buildConfigField "String", "PROPERTIES_FILE", "\"valuesAndroidDev.properties\""
+        signingConfig signingConfigs.TutorialsHackro
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "NUMBER_RESULT", "\"NUMBER_RESULT_RELASE\""
+            debuggable false
+            signingConfig signingConfigs.TutorialsHackro
         }
-
+        develop {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "NUMBER_RESULT", "\"NUMBER_RESULT_DEVELOP\""
+            debuggable true
+            signingConfig signingConfigs.TutorialsHackro
+        }
+        sandbox {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "NUMBER_RESULT", "\"NUMBER_RESULT_SANDBOX\""
+            debuggable true
+            signingConfig signingConfigs.TutorialsHackro
+        }
     }
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+    productFlavors {
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
-
     compile glideDependencies.glide
     compile googleDependecies.gson
     compile retrofitDependencies.retrofit
     compile retrofitDependencies.adapter
     compile retrofitDependencies.converter
     compile retrofitDependencies.scalars
-
     compile rxandroidDependencies.rxandroid
     compile rxjavaDependencies.rxJava
-
-
     compile butterknifeDependencies.butterknife
-
     compile daggerDependencies.dagger
-
-
     compile recyclerDependencies.cardview
     compile recyclerDependencies.gridlayout
     compile recyclerDependencies.recycler
-
-
+    compile(othersDependencies.crashlytics) { transitive = true; }
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
-
     apt 'com.google.dagger:dagger-compiler:2.9'
     provided 'javax.annotation:jsr250-api:1.0'
     provided 'org.glassfish:javax.annotation:10.0-b28'
