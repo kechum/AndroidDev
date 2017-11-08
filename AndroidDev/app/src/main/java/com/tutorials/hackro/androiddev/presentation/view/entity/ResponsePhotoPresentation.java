@@ -14,10 +14,10 @@ public class ResponsePhotoPresentation implements Serializable
 
     @SerializedName("albumId")
     @Expose
-    private long albumId;
+    private String albumId;
     @SerializedName("id")
     @Expose
-    private long id;
+    private String id;
     @SerializedName("title")
     @Expose
     private String title;
@@ -32,34 +32,19 @@ public class ResponsePhotoPresentation implements Serializable
     public ResponsePhotoPresentation() {
     }
 
-    public ResponsePhotoPresentation(long albumId, long id, String title, String url, String thumbnailUrl) {
-        this.albumId = albumId;
-        this.id = id;
-        this.title = title;
-        this.url = url;
-        this.thumbnailUrl = thumbnailUrl;
-    }
-
-    /**
-     * No args constructor for use in serialization
-     *
-     */
-
-
-
-    public long getAlbumId() {
+    public String getAlbumId() {
         return albumId;
     }
 
-    public void setAlbumId(long albumId) {
+    public void setAlbumId(String albumId) {
         this.albumId = albumId;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -86,7 +71,6 @@ public class ResponsePhotoPresentation implements Serializable
     public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
     }
-
 
     @Override
     public String toString() {

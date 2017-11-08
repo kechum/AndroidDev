@@ -6,12 +6,14 @@ import com.tutorials.hackro.androiddev.domain.model.userfake.IdDomain;
 import com.tutorials.hackro.androiddev.domain.model.userfake.InfoDomain;
 import com.tutorials.hackro.androiddev.domain.model.userfake.LocationDomain;
 import com.tutorials.hackro.androiddev.domain.model.userfake.NameDomain;
+import com.tutorials.hackro.androiddev.domain.model.userfake.PictureDomain;
 import com.tutorials.hackro.androiddev.domain.model.userfake.ResultDomain;
 import com.tutorials.hackro.androiddev.presentation.view.entity.ResponseUserFakePresentation;
 import com.tutorials.hackro.androiddev.presentation.view.entity.userfake.IdPresentation;
 import com.tutorials.hackro.androiddev.presentation.view.entity.userfake.InfoPresentation;
 import com.tutorials.hackro.androiddev.presentation.view.entity.userfake.LocationPresentation;
 import com.tutorials.hackro.androiddev.presentation.view.entity.userfake.NamePresentation;
+import com.tutorials.hackro.androiddev.presentation.view.entity.userfake.PicturePresentation;
 import com.tutorials.hackro.androiddev.presentation.view.entity.userfake.ResultPresentation;
 
 import java.util.ArrayList;
@@ -71,6 +73,12 @@ public class MapperResponseUserFakePresentation extends Mapper<ResponseUserFakeD
 
             result.setId(id);
             result.setNat(r.getNat());
+
+            PicturePresentation pic = new PicturePresentation();
+            pic.setLarge(r.getPicture().getLarge());
+            pic.setMedium(r.getPicture().getMedium());
+            pic.setThumbnail(r.getPicture().getThumbnail());
+            result.setPicture(pic);
 
             listResult.add(result);
         }

@@ -22,16 +22,9 @@ public class LocationPresentation implements Serializable {
     private String state;
     @SerializedName("postcode")
     @Expose
-    private long postcode;
+    private String postcode;
 
     public LocationPresentation() {
-    }
-
-    public LocationPresentation(String street, String city, String state, long postcode) {
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.postcode = postcode;
     }
 
     public String getStreet() {
@@ -58,11 +51,11 @@ public class LocationPresentation implements Serializable {
         this.state = state;
     }
 
-    public long getPostcode() {
+    public String getPostcode() {
         return postcode;
     }
 
-    public void setPostcode(long postcode) {
+    public void setPostcode(String postcode) {
         this.postcode = postcode;
     }
 }

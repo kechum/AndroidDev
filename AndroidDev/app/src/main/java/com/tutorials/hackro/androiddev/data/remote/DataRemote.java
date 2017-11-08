@@ -2,9 +2,9 @@ package com.tutorials.hackro.androiddev.data.remote;
 
 import android.support.annotation.NonNull;
 
-import com.tutorials.hackro.androiddev.data.model.ResponsePhoto;
-import com.tutorials.hackro.androiddev.data.model.ResponsePost;
-import com.tutorials.hackro.androiddev.data.model.ResponseUser;
+import com.tutorials.hackro.androiddev.BuildConfig;
+import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponseUserFake;
+import com.tutorials.hackro.androiddev.domain.model.ResponseUserFakeDomain;
 
 import java.util.List;
 
@@ -20,24 +20,15 @@ import rx.Observable;
 public class DataRemote implements DataSourceRemote {
 
     private Retrofit retrofit;
+    private MapperResponseUserFake mapperResponseUserFake;
 
-    @Inject
-    public DataRemote(@NonNull Retrofit retrofit) {
+    @Inject public DataRemote(@NonNull Retrofit retrofit,@NonNull MapperResponseUserFake mapperResponseUserFake) {
         this.retrofit = retrofit;
+        this.mapperResponseUserFake = mapperResponseUserFake;
     }
 
-    @Override
-    public Observable<List<ResponsePost>> getListPost() {
-        return retrofit.create(RetrofitServicesJsonPlaceHolder.class).getListPost();
-    }
 
-    @Override
-    public Observable<List<ResponsePhoto>> getListPhotos() {
-        return retrofit.create(RetrofitServicesJsonPlaceHolder.class).getListPhotos();
-    }
-
-    @Override
-    public Observable<List<ResponseUser>> getListUsers() {
-        return retrofit.create(RetrofitServicesJsonPlaceHolder.class).getListUsers();
+    @Override public Observable<ResponseUserFakeDomain> getListResult() {
+        return retrofit.create(RetrofitServicesJsonPlaceHolder.class).getListResult(BuildConfig.NUMBER_RESULT).map(responseUserFakeDatas -> mapperResponseUserFake.map(responseUserFakeDatas));
     }
 }

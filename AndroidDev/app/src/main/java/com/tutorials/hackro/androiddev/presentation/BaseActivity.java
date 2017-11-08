@@ -11,18 +11,18 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity{
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+    @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        initView();
+        initializeView();
     }
 
-
-    public void initView() {
+    public void initializeView() {
         bindView();
     }
+
     protected abstract int getLayoutId();
+
     public void bindView(){
         ButterKnife.bind(this);
     }

@@ -15,11 +15,13 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "BASE_URL", "\"https://jsonplaceholder.typicode.com/\""
+        buildConfigField "String", "BASE_URL", "\"https://randomuser.me/\""
+        buildConfigField "String", "BASE_API", "\"api/\""
+        buildConfigField "String", "API_PARAMETER", "\"results\""
 
-        buildConfigField "String", "ENDPOINT_POST", "\"/posts\""
-        buildConfigField "String", "ENDPOINT_PHOTOS", "\"/photos\""
-        buildConfigField "String", "ENDPOINT_USERS","\"/users\""
+
+        //Values API
+        buildConfigField "String", "NUMBER_RESULT", "\"4500\""
 
     }
     buildTypes {

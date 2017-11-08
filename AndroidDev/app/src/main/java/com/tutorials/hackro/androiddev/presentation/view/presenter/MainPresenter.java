@@ -4,17 +4,14 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.tutorials.hackro.androiddev.data.model.ResponsePost;
 import com.tutorials.hackro.androiddev.domain.DefaultSubscriber;
-import com.tutorials.hackro.androiddev.domain.model.ResponsePhotoDomain;
-import com.tutorials.hackro.androiddev.domain.model.ResponseUserDomain;
-import com.tutorials.hackro.androiddev.domain.usecase.GetListPhotos;
-import com.tutorials.hackro.androiddev.domain.usecase.GetListPost;
-import com.tutorials.hackro.androiddev.domain.usecase.GetListUsers;
-import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponsePhotoPresentation;
-import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseUserPresentation;
+import com.tutorials.hackro.androiddev.domain.model.ResponseUserFakeDomain;
+import com.tutorials.hackro.androiddev.domain.usecase.GetListResult;
+import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseUserFakePresentation;
 import com.tutorials.hackro.androiddev.presentation.view.entity.ResponsePhotoPresentation;
+import com.tutorials.hackro.androiddev.presentation.view.entity.ResponseUserFakePresentation;
 import com.tutorials.hackro.androiddev.presentation.view.entity.ResponseUserPresentation;
+import com.tutorials.hackro.androiddev.presentation.view.entity.userfake.ResultPresentation;
 
 import java.util.List;
 
@@ -26,38 +23,25 @@ import javax.inject.Inject;
 
 public class MainPresenter extends  Presenter<MainPresenter.View>{
 
-    private SharedPreferences sharedPreferences;
-    private GetListPhotos getListPhotos;
-    private GetListPost getListPost;
-    private GetListUsers getListUsers;
 
-    private MapperResponseUserPresentation mapperUser;
-    private MapperResponsePhotoPresentation mapperPhoto;
+    private GetListResult getListResult;
+    private MapperResponseUserFakePresentation mapperResponseUserFake;
+
     @Inject
-    public MainPresenter(SharedPreferences sharedPreferences,@NonNull GetListPost getListPost,@NonNull GetListPhotos getListPhotos,@NonNull GetListUsers getListUsers,@NonNull MapperResponseUserPresentation mapperUser,@NonNull MapperResponsePhotoPresentation mapperPhoto){
-        this.sharedPreferences = sharedPreferences;
-        this.getListPost = getListPost;
-        this.getListPhotos = getListPhotos;
-        this.getListUsers = getListUsers;
-        this.mapperUser = mapperUser;
-        this.mapperPhoto = mapperPhoto;
+    public MainPresenter(@NonNull GetListResult getListResult,MapperResponseUserFakePresentation mapperResponseUserFake){
+        this.getListResult = getListResult;
+        this.mapperResponseUserFake = mapperResponseUserFake;
     }
 
 
     @Override
     public void initialize() {
         super.initialize();
-        getView().methodAMainActivity();
-        //getListPost();
-        listPhotos();
-        //listUsers();
+        listResult();
     }
 
-    private void listUsers() {
-        getListUsers.execute(new GetListUsersObservable());
-    }
 
-    private class GetListUsersObservable extends DefaultSubscriber<List<ResponseUserDomain>>{
+    private class GetListResultObservable extends DefaultSubscriber<ResponseUserFakeDomain>{
         @Override
         public void onCompleted() {
             super.onCompleted();
@@ -69,82 +53,26 @@ public class MainPresenter extends  Presenter<MainPresenter.View>{
         }
 
         @Override
-        public void onNext(List<ResponseUserDomain> responseUserDomains) {
-            super.onNext(responseUserDomains);
-
-            List<ResponseUserPresentation> listUsers = mapperUser.map(responseUserDomains);
-            getView().showListUsers(listUsers);
-            Log.e("size list Users: ", String.valueOf(listUsers.size()));
+        public void onNext(ResponseUserFakeDomain userFakeDomains) {
+            super.onNext(userFakeDomains);
+            ResponseUserFakePresentation listUsers = mapperResponseUserFake.map(userFakeDomains);
+            getView().showListResult(listUsers.getResults());
         }
     }
 
-    private void listPhotos() {
-        getListPhotos.execute(new GetListPhotosObservable());
-    }
-
-    private class  GetListPhotosObservable extends  DefaultSubscriber<List<ResponsePhotoDomain>>{
-        @Override
-        public void onCompleted() {
-            super.onCompleted();
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            super.onError(e);
-        }
-
-        @Override
-        public void onNext(List<ResponsePhotoDomain> responsePhoto) {
-            super.onNext(responsePhoto);
-            getView().showListPhotos(mapperPhoto.map(responsePhoto));
-        }
-    }
-
-    public void getListPost(){
-        getView().showLoading();
-        getListPost.execute(new GetListPostObservable());
-    }
-
-    //Object the response type
-    private final class GetListPostObservable extends DefaultSubscriber<List<ResponsePost>>{
-        private  String responseString = "";
-        @Override
-        public void onCompleted() {
-            super.onCompleted();
-            getView().hideLoading();
-            getView().showPosts(responseString);
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            super.onError(e);
-            e.printStackTrace();
-            getView().hideLoading();
-            getView().showError(e.getMessage());
-        }
-
-        @Override
-        public void onNext(List<ResponsePost> responsePost) {
-            super.onNext(responsePost);
-            for (ResponsePost post : responsePost) {
-                responseString += post.toString() +"\n";
-            }
-
-        }
+    private void listResult() {
+        getListResult.execute(new GetListResultObservable());
     }
 
 
 
-    public void onItemOnClick(ResponsePhotoPresentation responsePhoto) {
-        getView().showPhotoDetail(responsePhoto.toString());
+    public void onItemOnClick(ResultPresentation responseUserFakePresentation) {
+        getView().showPhotoDetail(responseUserFakePresentation.toString());
     }
 
     public interface View extends Presenter.View{
-        void methodAMainActivity();
-        void showPosts(String responseString);
         void showPhotoDetail(String details);
-        void showListPhotos(List<ResponsePhotoPresentation> photoList);
-        void showListUsers(List<ResponseUserPresentation> listUsers);
+        void showListResult(List<ResultPresentation> listUsers);
     }
 
 

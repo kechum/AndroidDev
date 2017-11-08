@@ -12,7 +12,7 @@ import java.util.List;
  * Created by hackro on 2/10/17.
  */
 
-public class ResponseUserFake  implements Serializable
+public class ResponseUserFakeData implements Serializable
 {
 
     @SerializedName("results")
@@ -23,12 +23,12 @@ public class ResponseUserFake  implements Serializable
     private InfoData info;
     private final static long serialVersionUID = 7000051412065908305L;
 
-    public ResponseUserFake(List<ResultData> results, InfoData info) {
+    public ResponseUserFakeData(List<ResultData> results, InfoData info) {
         this.results = results;
         this.info = info;
     }
 
-    public ResponseUserFake() {
+    public ResponseUserFakeData() {
     }
 
     public List<ResultData> getResults() {

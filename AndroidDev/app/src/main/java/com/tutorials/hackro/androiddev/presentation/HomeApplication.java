@@ -14,12 +14,10 @@ import javax.inject.Inject;
  */
 public class HomeApplication extends Application{
 
-    @Inject
-    AppComponent appComponent;
+    @Inject AppComponent appComponent;
 
 
-    @Override
-    public void onCreate() {
+    @Override public void onCreate() {
         super.onCreate();
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))

@@ -1,6 +1,6 @@
 package com.tutorials.hackro.androiddev.presentation.view.activity;
 
-import android.support.v7.widget.GridLayoutManager;
+import android.app.Dialog;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -10,8 +10,7 @@ import com.tutorials.hackro.androiddev.R;
 import com.tutorials.hackro.androiddev.presentation.BaseActivity;
 import com.tutorials.hackro.androiddev.presentation.HomeApplication;
 import com.tutorials.hackro.androiddev.presentation.adapter.PhotosAdapter;
-import com.tutorials.hackro.androiddev.presentation.view.entity.ResponsePhotoPresentation;
-import com.tutorials.hackro.androiddev.presentation.view.entity.ResponseUserPresentation;
+import com.tutorials.hackro.androiddev.presentation.view.entity.userfake.ResultPresentation;
 import com.tutorials.hackro.androiddev.presentation.view.presenter.MainPresenter;
 
 import java.util.List;
@@ -28,13 +27,10 @@ public class MainActivity extends BaseActivity implements MainPresenter.View{
 
     private PhotosAdapter photosAdapter;
 
-    private GridLayoutManager layout;
-
     private StaggeredGridLayoutManager layoutManager;
 
-    @Override
-    public void initView() {
-        super.initView();
+    @Override public void initializeView() {
+        super.initializeView();
         initializeDagger();
         initializePresenter();
         initAdapter();
@@ -44,7 +40,6 @@ public class MainActivity extends BaseActivity implements MainPresenter.View{
     }
 
     private void initLayoutManager() {
-        layout = new GridLayoutManager(this,1);
         layoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
     }
 
@@ -55,7 +50,7 @@ public class MainActivity extends BaseActivity implements MainPresenter.View{
     }
 
     private void initAdapter() {
-        photosAdapter = new PhotosAdapter(presenter);
+        photosAdapter = new PhotosAdapter(presenter,getApplicationContext());
     }
 
     private void initializeDagger() {
@@ -67,46 +62,33 @@ public class MainActivity extends BaseActivity implements MainPresenter.View{
         presenter.setView(this);
     }
 
-    @Override
-    protected int getLayoutId() {
+    @Override protected int getLayoutId() {
         return R.layout.activity_main;
     }
-    @Override
-    public void methodAMainActivity() {
-    }
 
-    @Override
-    public void showPosts(String responsePost) {
-        Toast.makeText(this,responsePost.toString() ,Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void showPhotoDetail(String details) {
+    @Override public void showPhotoDetail(String details) {
         Toast.makeText(this,details ,Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void showListPhotos(List<ResponsePhotoPresentation> photoList) {
-        photosAdapter.setListPhotos(photoList);
+    @Override public void showListResult(List<ResultPresentation> listUsers) {
+        photosAdapter.setListResult(listUsers);
         photosAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void showListUsers(List<ResponseUserPresentation> listUsers) {
-        Log.e("results users:       ",listUsers.toString());
-        Toast.makeText(this,listUsers.toString(),Toast.LENGTH_SHORT).show();
+
+    @Override public void showProgres() {
+        Log.e("hide ","Progress");
     }
 
-    @Override
-    public void showLoading() {
+    @Override public void hideProgress() {
         Log.e("hide ","Progress");
     }
-    @Override
-    public void hideLoading() {
-        Log.e("hide ","Progress");
-    }
-    @Override
-    public void showError(String message) {
+
+    @Override public void showError(String message) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override public void setValuesFabric() {
+
     }
 }

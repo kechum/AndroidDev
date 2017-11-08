@@ -8,8 +8,6 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.tutorials.hackro.androiddev.BuildConfig;
-import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponsePhoto;
-import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponseUser;
 import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponseUserFake;
 import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponsePhotoPresentation;
 import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseUserFakePresentation;
@@ -32,8 +30,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  * Created by hackro on 3/08/17.
  */
 
-@Module
-public class AndroidDevModule {
+@Module public class AndroidDevModule {
 
 
 
@@ -109,34 +106,6 @@ public class AndroidDevModule {
                 .build();
     }
 
-
-    @Provides
-    @Singleton
-    MapperResponsePhoto provideMapperResponsePhoto(){
-        return new MapperResponsePhoto();
-    }
-
-    @Provides
-    @Singleton
-    MapperResponseUser provideMapperResponseUser(){
-        return new MapperResponseUser();
-    }
-
-
-
-    @Provides
-    @Singleton
-    MapperResponseUserPresentation provideMapperResponseUserPresentation(){
-        return new MapperResponseUserPresentation();
-    }
-
-
-
-    @Provides
-    @Singleton
-    MapperResponsePhotoPresentation provideMapperResponsePhotoPresentation(){
-        return new MapperResponsePhotoPresentation();
-    }
 
     @Provides
     @Singleton

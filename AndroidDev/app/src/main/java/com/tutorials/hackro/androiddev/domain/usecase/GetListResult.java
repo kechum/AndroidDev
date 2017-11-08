@@ -10,20 +10,20 @@ import javax.inject.Inject;
 import rx.Observable;
 
 /**
- * Created by hackro on 10/08/17.
+ * Created by hackro on 22/08/17.
  */
-//this class execute the repository
-public class GetListPost extends UseCase {
+
+public class GetListResult extends UseCase {
 
     private AppRepository repository;
 
     @Inject
-    public GetListPost(@NonNull AppRepository repository) {
+    public GetListResult(@NonNull AppRepository repository) {
         this.repository = repository;
     }
 
     @Override
     protected Observable buildObservableUseCase() {
-        return repository.getListPost();
+        return repository.getListResult();
     }
 }

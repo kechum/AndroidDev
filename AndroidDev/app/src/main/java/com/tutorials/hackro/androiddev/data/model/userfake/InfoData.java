@@ -17,35 +17,16 @@ public class InfoData implements Serializable
     private String seed;
     @SerializedName("results")
     @Expose
-    private long results;
+    private String results;
     @SerializedName("page")
     @Expose
-    private long page;
+    private String page;
     @SerializedName("version")
     @Expose
     private String version;
     private final static long serialVersionUID = -1656547464258057497L;
 
-    /**
-     * No args constructor for use in serialization
-     *
-     */
     public InfoData() {
-    }
-
-    /**
-     *
-     * @param results
-     * @param page
-     * @param seed
-     * @param version
-     */
-    public InfoData(String seed, long results, long page, String version) {
-        super();
-        this.seed = seed;
-        this.results = results;
-        this.page = page;
-        this.version = version;
     }
 
     public String getSeed() {
@@ -56,19 +37,19 @@ public class InfoData implements Serializable
         this.seed = seed;
     }
 
-    public long getResults() {
+    public String getResults() {
         return results;
     }
 
-    public void setResults(long results) {
+    public void setResults(String results) {
         this.results = results;
     }
 
-    public long getPage() {
+    public String getPage() {
         return page;
     }
 
-    public void setPage(long page) {
+    public void setPage(String page) {
         this.page = page;
     }
 
@@ -79,5 +60,4 @@ public class InfoData implements Serializable
     public void setVersion(String version) {
         this.version = version;
     }
-
 }

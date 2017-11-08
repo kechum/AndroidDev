@@ -11,8 +11,7 @@ import dagger.Provides;
  * Created by hackro on 3/08/17.
  */
 
-@Module
-public class AppModule {
+@Module public class AppModule {
 
     Application mApplication;
 

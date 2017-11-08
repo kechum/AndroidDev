@@ -1,16 +1,18 @@
 package com.tutorials.hackro.androiddev.data.remote.mapper;
 
-import com.tutorials.hackro.androiddev.data.model.ResponseUserFake;
+import com.tutorials.hackro.androiddev.data.model.ResponseUserFakeData;
 import com.tutorials.hackro.androiddev.data.model.userfake.IdData;
 import com.tutorials.hackro.androiddev.data.model.userfake.InfoData;
 import com.tutorials.hackro.androiddev.data.model.userfake.LocationData;
 import com.tutorials.hackro.androiddev.data.model.userfake.NameData;
+import com.tutorials.hackro.androiddev.data.model.userfake.PictureData;
 import com.tutorials.hackro.androiddev.data.model.userfake.ResultData;
 import com.tutorials.hackro.androiddev.domain.model.ResponseUserFakeDomain;
 import com.tutorials.hackro.androiddev.domain.model.userfake.IdDomain;
 import com.tutorials.hackro.androiddev.domain.model.userfake.InfoDomain;
 import com.tutorials.hackro.androiddev.domain.model.userfake.LocationDomain;
 import com.tutorials.hackro.androiddev.domain.model.userfake.NameDomain;
+import com.tutorials.hackro.androiddev.domain.model.userfake.PictureDomain;
 import com.tutorials.hackro.androiddev.domain.model.userfake.ResultDomain;
 
 import java.util.ArrayList;
@@ -20,10 +22,10 @@ import java.util.List;
  * Created by hackro on 1/10/17.
  */
 
-public class MapperResponseUserFake extends Mapper<ResponseUserFake,ResponseUserFakeDomain> {
+public class MapperResponseUserFake extends Mapper<ResponseUserFakeData,ResponseUserFakeDomain> {
 
     @Override
-    public ResponseUserFakeDomain map(ResponseUserFake value) {
+    public ResponseUserFakeDomain map(ResponseUserFakeData value) {
         ResponseUserFakeDomain resultUser = new ResponseUserFakeDomain();
 
         InfoDomain info = new InfoDomain();
@@ -41,6 +43,13 @@ public class MapperResponseUserFake extends Mapper<ResponseUserFake,ResponseUser
         for (ResultData r : value.getResults()){
             ResultDomain result = new ResultDomain();
             result = new ResultDomain();
+
+            PictureDomain pic = new PictureDomain();
+            pic.setLarge(r.getPicture().getLarge());
+            pic.setMedium(r.getPicture().getMedium());
+            pic.setThumbnail(r.getPicture().getThumbnail());
+            result.setPicture(pic);
+
             result.setGender(r.getGender());
 
                 NameDomain name = new NameDomain();
@@ -80,9 +89,9 @@ public class MapperResponseUserFake extends Mapper<ResponseUserFake,ResponseUser
     }
 
     @Override
-    public ResponseUserFake reverseMap(ResponseUserFakeDomain value) {
+    public ResponseUserFakeData reverseMap(ResponseUserFakeDomain value) {
 
-        ResponseUserFake resultUser = new ResponseUserFake();
+        ResponseUserFakeData resultUser = new ResponseUserFakeData();
 
         InfoData info = new InfoData();
 

@@ -17,19 +17,13 @@ public class Presenter<T extends Presenter.View> {
         return view;
     }
 
-    public void initialize() {
-
-    }
-
+    public void initialize() {}
 
     public interface View {
-
-        void showLoading();
-
-        void hideLoading();
-
+        void showProgres();
+        void hideProgress();
         void showError(String message);
-
+        void setValuesFabric();
     }
 }
 
