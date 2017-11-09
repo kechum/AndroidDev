@@ -1,8 +1,6 @@
 package com.tutorials.hackro.androiddev.data.remote;
 
-import com.tutorials.hackro.androiddev.domain.model.ResponseUserFakeDomain;
-
-import java.util.List;
+import com.tutorials.hackro.androiddev.domain.model.ResponseRedditDomain;
 
 import rx.Observable;
 
@@ -12,7 +10,7 @@ import rx.Observable;
 // this interface is use in AppRepository
 public interface DataSourceRemote {
 
-    Observable<ResponseUserFakeDomain> getListResult();
+    Observable<ResponseRedditDomain> getListResult();
 
 
 }

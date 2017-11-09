@@ -1,18 +1,15 @@
 package com.tutorials.hackro.androiddev.presentation.view.presenter;
 
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.tutorials.hackro.androiddev.domain.DefaultSubscriber;
-import com.tutorials.hackro.androiddev.domain.model.ResponseUserFakeDomain;
+import com.tutorials.hackro.androiddev.domain.model.ResponseRedditDomain;
 import com.tutorials.hackro.androiddev.domain.usecase.GetListResult;
-import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseUserFakePresentation;
-import com.tutorials.hackro.androiddev.presentation.view.entity.ResponsePhotoPresentation;
-import com.tutorials.hackro.androiddev.presentation.view.entity.ResponseUserFakePresentation;
-import com.tutorials.hackro.androiddev.presentation.view.entity.ResponseUserPresentation;
-import com.tutorials.hackro.androiddev.presentation.view.entity.userfake.ResultPresentation;
+import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseRedditPresentation;
+import com.tutorials.hackro.androiddev.presentation.view.entity.ResponseRedditPresentation;
+import com.tutorials.hackro.androiddev.presentation.view.entity.reddit.ChildLayerPresentation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,27 +18,28 @@ import javax.inject.Inject;
  * Created by hackro on 3/08/17.
  */
 
-public class MainPresenter extends  Presenter<MainPresenter.View>{
+public class MainPresenter extends Presenter<MainPresenter.View> {
 
 
     private GetListResult getListResult;
-    private MapperResponseUserFakePresentation mapperResponseUserFake;
+    private MapperResponseRedditPresentation mapperResponseRedditPresentation;
 
     @Inject
-    public MainPresenter(@NonNull GetListResult getListResult,MapperResponseUserFakePresentation mapperResponseUserFake){
+    public MainPresenter(@NonNull GetListResult getListResult, MapperResponseRedditPresentation mapperResponseRedditPresentation) {
         this.getListResult = getListResult;
-        this.mapperResponseUserFake = mapperResponseUserFake;
+        this.mapperResponseRedditPresentation = mapperResponseRedditPresentation;
     }
 
 
     @Override
     public void initialize() {
         super.initialize();
+        getView().hideToolbar();
         listResult();
     }
 
 
-    private class GetListResultObservable extends DefaultSubscriber<ResponseUserFakeDomain>{
+    private class GetListResultObservable extends DefaultSubscriber<ResponseRedditDomain> {
         @Override
         public void onCompleted() {
             super.onCompleted();
@@ -53,10 +51,18 @@ public class MainPresenter extends  Presenter<MainPresenter.View>{
         }
 
         @Override
-        public void onNext(ResponseUserFakeDomain userFakeDomains) {
-            super.onNext(userFakeDomains);
-            ResponseUserFakePresentation listUsers = mapperResponseUserFake.map(userFakeDomains);
-            getView().showListResult(listUsers.getResults());
+        public void onNext(ResponseRedditDomain responseRedditDomain) {
+            super.onNext(responseRedditDomain);
+
+            ResponseRedditPresentation responseRedditPresentation = mapperResponseRedditPresentation.map(responseRedditDomain);
+            List<ChildLayerPresentation> listChild = new ArrayList<>();
+
+            for (ChildLayerPresentation child : responseRedditPresentation.getData().getChildren()){
+                   // if (child.getData().getPreview()!=null && child.getData().getThumbnail()!=null && !child.getData().getThumbnail().equals(""))
+                         listChild.add(child);
+            }
+
+            getView().showListResult(listChild);
         }
     }
 
@@ -65,14 +71,16 @@ public class MainPresenter extends  Presenter<MainPresenter.View>{
     }
 
 
-
-    public void onItemOnClick(ResultPresentation responseUserFakePresentation) {
+    public void onItemOnClick(ChildLayerPresentation responseUserFakePresentation) {
         getView().showPhotoDetail(responseUserFakePresentation.toString());
     }
 
-    public interface View extends Presenter.View{
+    public interface View extends Presenter.View {
         void showPhotoDetail(String details);
-        void showListResult(List<ResultPresentation> listUsers);
+
+        void showListResult(List<ChildLayerPresentation> listUsers);
+
+        void hideToolbar();
     }
 
 

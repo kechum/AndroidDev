@@ -1,9 +1,7 @@
 package com.tutorials.hackro.androiddev.data.remote;
 
 import com.tutorials.hackro.androiddev.BuildConfig;
-import com.tutorials.hackro.androiddev.data.model.ResponseUserFakeData;
-
-import java.util.List;
+import com.tutorials.hackro.androiddev.data.model.ResponseRedditData;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -16,9 +14,9 @@ import rx.Observable;
 public interface RetrofitServicesJsonPlaceHolder {
 
     /**
-     *
      * @return
      */
-    @GET(BuildConfig.BASE_API) Observable<ResponseUserFakeData> getListResult(@Query(BuildConfig.API_PARAMETER) String result);
+    @GET(BuildConfig.BASE_API_TYPE)
+    Observable<ResponseRedditData> getListResult(@Query(BuildConfig.API_PARAMETER) String result);
 
 }

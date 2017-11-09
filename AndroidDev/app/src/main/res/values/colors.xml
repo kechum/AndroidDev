@@ -3,4 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="main_activity_background">#eee</color>
+    <color name="item_photo_title">#0079d3</color>
+    <color name="item_photo_div_title">#dadada</color>
+
+    <color name="item_photo_border">#545454</color>
+
+
 </resources>

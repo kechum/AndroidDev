@@ -11,7 +11,7 @@ import rx.subscriptions.Subscriptions;
  * Created by hackro on 10/08/17.
  */
 
-public abstract  class UseCase {
+public abstract class UseCase {
 
     private Subscription subscription = Subscriptions.empty();
 
@@ -19,7 +19,7 @@ public abstract  class UseCase {
     }
 
 
-    public void execute(Subscriber UseCaseSubscriber){
+    public void execute(Subscriber UseCaseSubscriber) {
         this.subscription = this.buildObservableUseCase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -27,7 +27,7 @@ public abstract  class UseCase {
     }
 
 
-    public void unsubsrcriber(){
+    public void unsubsrcriber() {
         if (!subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }
