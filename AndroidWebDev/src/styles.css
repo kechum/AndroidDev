@@ -1,4 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600');
 body {
-    margin-top: 70px;
+    margin-top: 100px;
+    background: #efefef;
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+.btn-primary{
+  background:#4c4949;
+  border-color: #4c4949;
+  font-size: 13px;
+  font-weight: 400;
+}
+.btn-primary:focus,
+.btn-primary:hover{
+  background: #6d6d6d;
+  border-color:#6d6d6d;
+}
+h1{
+  color:#333;
+}
+.bg-dark{
+  background:url(assets/images/fondo.png);
+  background-size: cover;
+}
+.body__title{
+  color: #FFF;
+  font-family: Montserrat, Arial, Helvetica, sans-serif;
+  font-size: 25px;
 }
