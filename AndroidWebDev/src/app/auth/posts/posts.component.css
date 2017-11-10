@@ -1,0 +1,32 @@
+.post__body{
+  /*background:rgba(52, 58, 64,.2);*/
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+.post__body h6{
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #6d6767;
+}
+.card-columns{
+  columns: 4;
+}
+.card__item{
+  box-shadow: 2px 2px 3px rgba(0,0,0,.1);
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .card-columns{
+    columns: 3;
+  }
+}
+@media (min-width: 413px) and (max-width: 740px) {
+  .card-columns{
+    columns: 2;
+  }
+}
+@media (min-width: 0px) and (max-width: 412px) {
+  .card-columns{
+    columns: 1;
+  }
+}

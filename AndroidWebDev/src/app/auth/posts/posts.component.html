@@ -2,15 +2,16 @@
   <h4 class="text-center">{{errortext}}</h4>
 </div>
 
-<div class="row equal row-eq-height mt-4">
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 mb-4" *ngFor="let post of posts | paginate: { itemsPerPage: 12, currentPage: p }">
-  <div class="card h-100">
-    <h5 class="card-header">{{ post.title }}</h5>
-    <div class="card-body">
-      <p class="card-text">{{ post.body }}</p>
-      <button class="btn btn-primary">Ir al Post</button>
+<!--<div class="row equal row-eq-height mt-4">-->
+<div class="card-columns">
+<div class="card h-100 card__item animated fadeIn" *ngFor="let post of posts | paginate: { itemsPerPage: 30, currentPage: p }">
+    <div>
+      <img class="card-img-top" src="{{ post.thumbnail}}">
     </div>
-  </div>
+    <div class="card-body post__body">
+      <h6>{{ post.title }}</h6>
+      <a href="{{post.url}}" target="_blank" class="btn btn-primary mt-2">Ir al Post</a>
+    </div>
 </div>
 </div>
 <div class="container text-center">
