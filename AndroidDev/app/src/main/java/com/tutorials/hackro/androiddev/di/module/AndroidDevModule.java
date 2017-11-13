@@ -8,11 +8,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.tutorials.hackro.androiddev.BuildConfig;
-import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponseReddit;
 import com.tutorials.hackro.androiddev.presentation.Utils.AssetsPropertyReader;
-import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseRedditPresentation;
-
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
@@ -105,19 +101,6 @@ public class AndroidDevModule {
                 .baseUrl(BuildConfig.BASE_URL)
                 .client(okHttpClient)
                 .build();
-    }
-
-
-    @Provides
-    @Singleton
-    MapperResponseReddit provideMapperResponseUserFake() {
-        return new MapperResponseReddit();
-    }
-
-    @Provides
-    @Singleton
-    MapperResponseRedditPresentation provideMapperResponseRedditPresentation() {
-        return new MapperResponseRedditPresentation();
     }
 
 

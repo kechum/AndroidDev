@@ -9,7 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.tutorials.hackro.androiddev.R;
-import com.tutorials.hackro.androiddev.presentation.view.entity.reddit.ChildLayerPresentation;
+import com.tutorials.hackro.androiddev.data.model.reddit.ChildLayerData;
 import com.tutorials.hackro.androiddev.presentation.view.presenter.MainPresenter;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class PhotosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<ChildLayerPresentation> listResult;
+    private List<ChildLayerData> listResult;
     private MainPresenter presenter;
     private Context context;
 
@@ -51,7 +51,7 @@ public class PhotosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return listResult.size();
     }
 
-    public void setListResult(List<ChildLayerPresentation> listResult) {
+    public void setListResult(List<ChildLayerData> listResult) {
         this.listResult = listResult;
     }
 

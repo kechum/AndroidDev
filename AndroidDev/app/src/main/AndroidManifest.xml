@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.tutorials.hackro.androiddev">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tutorials.hackro.androiddev">
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
@@ -21,8 +22,7 @@
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="32158ca4af9355448212ab1a4f7febaced8d5096"
-            />
+            android:value="32158ca4af9355448212ab1a4f7febaced8d5096" />
 
     </application>
 

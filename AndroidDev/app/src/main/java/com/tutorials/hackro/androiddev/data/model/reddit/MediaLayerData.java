@@ -1,4 +1,3 @@
-
 package com.tutorials.hackro.androiddev.data.model.reddit;
 
 import com.google.gson.annotations.Expose;

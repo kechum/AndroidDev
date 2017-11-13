@@ -2,13 +2,10 @@ package com.tutorials.hackro.androiddev.presentation.view.presenter;
 
 import android.support.annotation.NonNull;
 
+import com.tutorials.hackro.androiddev.data.model.ResponseRedditData;
+import com.tutorials.hackro.androiddev.data.model.reddit.ChildLayerData;
 import com.tutorials.hackro.androiddev.domain.DefaultSubscriber;
-import com.tutorials.hackro.androiddev.domain.model.ResponseRedditDomain;
 import com.tutorials.hackro.androiddev.domain.usecase.GetListResult;
-import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseRedditPresentation;
-import com.tutorials.hackro.androiddev.presentation.view.entity.ResponseRedditPresentation;
-import com.tutorials.hackro.androiddev.presentation.view.entity.reddit.ChildLayerPresentation;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,12 +19,9 @@ public class MainPresenter extends Presenter<MainPresenter.View> {
 
 
     private GetListResult getListResult;
-    private MapperResponseRedditPresentation mapperResponseRedditPresentation;
 
-    @Inject
-    public MainPresenter(@NonNull GetListResult getListResult, MapperResponseRedditPresentation mapperResponseRedditPresentation) {
+    @Inject public MainPresenter(@NonNull GetListResult getListResult) {
         this.getListResult = getListResult;
-        this.mapperResponseRedditPresentation = mapperResponseRedditPresentation;
     }
 
 
@@ -39,7 +33,7 @@ public class MainPresenter extends Presenter<MainPresenter.View> {
     }
 
 
-    private class GetListResultObservable extends DefaultSubscriber<ResponseRedditDomain> {
+    private class GetListResultObservable extends DefaultSubscriber<ResponseRedditData> {
         @Override
         public void onCompleted() {
             super.onCompleted();
@@ -51,15 +45,14 @@ public class MainPresenter extends Presenter<MainPresenter.View> {
         }
 
         @Override
-        public void onNext(ResponseRedditDomain responseRedditDomain) {
-            super.onNext(responseRedditDomain);
+        public void onNext(ResponseRedditData responseRedditData) {
+            super.onNext(responseRedditData);
 
-            ResponseRedditPresentation responseRedditPresentation = mapperResponseRedditPresentation.map(responseRedditDomain);
-            List<ChildLayerPresentation> listChild = new ArrayList<>();
+            List<ChildLayerData> listChild = new ArrayList<>();
 
-            for (ChildLayerPresentation child : responseRedditPresentation.getData().getChildren()){
-                   // if (child.getData().getPreview()!=null && child.getData().getThumbnail()!=null && !child.getData().getThumbnail().equals(""))
-                         listChild.add(child);
+            for (ChildLayerData child : responseRedditData.getData().getChildren()) {
+                // if (child.getData().getPreview()!=null && child.getData().getThumbnail()!=null && !child.getData().getThumbnail().equals(""))
+                listChild.add(child);
             }
 
             getView().showListResult(listChild);
@@ -71,14 +64,14 @@ public class MainPresenter extends Presenter<MainPresenter.View> {
     }
 
 
-    public void onItemOnClick(ChildLayerPresentation responseUserFakePresentation) {
+    public void onItemOnClick(ChildLayerData responseUserFakePresentation) {
         getView().showPhotoDetail(responseUserFakePresentation.toString());
     }
 
     public interface View extends Presenter.View {
         void showPhotoDetail(String details);
 
-        void showListResult(List<ChildLayerPresentation> listUsers);
+        void showListResult(List<ChildLayerData> listUsers);
 
         void hideToolbar();
     }

@@ -1,16 +1,15 @@
 package com.tutorials.hackro.androiddev.presentation.view.activity;
 
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.tutorials.hackro.androiddev.R;
+import com.tutorials.hackro.androiddev.data.model.reddit.ChildLayerData;
 import com.tutorials.hackro.androiddev.presentation.BaseActivity;
 import com.tutorials.hackro.androiddev.presentation.HomeApplication;
 import com.tutorials.hackro.androiddev.presentation.adapter.PhotosAdapter;
-import com.tutorials.hackro.androiddev.presentation.view.entity.reddit.ChildLayerPresentation;
 import com.tutorials.hackro.androiddev.presentation.view.presenter.MainPresenter;
 
 import java.util.List;
@@ -31,7 +30,8 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
 
     private StaggeredGridLayoutManager layoutManager;
 
-    @Override public void initializeView() {
+    @Override
+    public void initializeView() {
         super.initializeView();
         initializeDagger();
         initializePresenter();
@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
     }
 
     private void initLayoutManager() {
-        layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
     }
 
 
@@ -76,7 +76,7 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
     }
 
     @Override
-    public void showListResult(List<ChildLayerPresentation> listUsers) {
+    public void showListResult(List<ChildLayerData> listUsers) {
         photosAdapter.setListResult(listUsers);
         photosAdapter.notifyDataSetChanged();
     }

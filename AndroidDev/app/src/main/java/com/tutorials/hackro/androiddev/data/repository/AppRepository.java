@@ -2,8 +2,8 @@ package com.tutorials.hackro.androiddev.data.repository;
 
 import android.support.annotation.NonNull;
 
+import com.tutorials.hackro.androiddev.data.model.ResponseRedditData;
 import com.tutorials.hackro.androiddev.data.remote.DataRemote;
-import com.tutorials.hackro.androiddev.domain.model.ResponseRedditDomain;
 
 import javax.inject.Inject;
 
@@ -23,7 +23,7 @@ public class AppRepository implements DataSourceRepository {
     }
 
     @Override
-    public Observable<ResponseRedditDomain> getListResult() {
+    public Observable<ResponseRedditData> getListResult() {
         return dataRemote.getListResult();
     }
 
