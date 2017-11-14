@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.tutorials.hackro.androiddev.BuildConfig;
 import com.tutorials.hackro.androiddev.presentation.Utils.AssetsPropertyReader;
+import com.tutorials.hackro.androiddev.presentation.entity.ArticleDetails;
 
 import javax.inject.Singleton;
 
@@ -110,5 +111,11 @@ public class AndroidDevModule {
         return new AssetsPropertyReader(application);
     }
 
+
+    @Singleton
+    @Provides
+    ArticleDetails providesArticleDetails(){
+        return new ArticleDetails();
+    }
 
 }

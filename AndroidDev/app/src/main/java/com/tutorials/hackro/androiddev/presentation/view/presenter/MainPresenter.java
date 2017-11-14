@@ -6,6 +6,8 @@ import com.tutorials.hackro.androiddev.data.model.ResponseRedditData;
 import com.tutorials.hackro.androiddev.data.model.reddit.ChildLayerData;
 import com.tutorials.hackro.androiddev.domain.DefaultSubscriber;
 import com.tutorials.hackro.androiddev.domain.usecase.GetListResult;
+import com.tutorials.hackro.androiddev.presentation.entity.ArticleDetails;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +21,12 @@ public class MainPresenter extends Presenter<MainPresenter.View> {
 
 
     private GetListResult getListResult;
+    private ArticleDetails articleDetails;
 
-    @Inject public MainPresenter(@NonNull GetListResult getListResult) {
+
+    @Inject public MainPresenter(@NonNull GetListResult getListResult,@NonNull ArticleDetails articleDetails) {
         this.getListResult = getListResult;
+        this.articleDetails = articleDetails;
     }
 
 
@@ -65,8 +70,18 @@ public class MainPresenter extends Presenter<MainPresenter.View> {
 
 
     public void onItemOnClick(ChildLayerData responseUserFakePresentation) {
+        setValuesArticle(responseUserFakePresentation);
         getView().showPhotoDetail(responseUserFakePresentation.toString());
     }
+
+    private void setValuesArticle(ChildLayerData childLayerData) {
+        articleDetails.setComments(String.valueOf(childLayerData.getData().getNumComments()));
+        articleDetails.setTitle(childLayerData.getData().getTitle());
+        articleDetails.setId_post(childLayerData.getData().getSubredditId());
+        articleDetails.setUrlPicture(childLayerData.getData().getThumbnail());
+        articleDetails.setScore(String.valueOf(childLayerData.getData().getScore()));
+    }
+
 
     public interface View extends Presenter.View {
         void showPhotoDetail(String details);

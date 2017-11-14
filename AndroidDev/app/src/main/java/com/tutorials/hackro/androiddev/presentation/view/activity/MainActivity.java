@@ -1,5 +1,6 @@
 package com.tutorials.hackro.androiddev.presentation.view.activity;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -20,18 +21,15 @@ import butterknife.BindView;
 
 public class MainActivity extends BaseActivity implements MainPresenter.View {
 
-    @Inject
-    MainPresenter presenter;
+    @Inject MainPresenter presenter;
 
-    @BindView(R.id.recycler_photos)
-    RecyclerView recycler_photos;
+    @BindView(R.id.recycler_photos) RecyclerView recycler_photos;
 
     private PhotosAdapter photosAdapter;
 
     private StaggeredGridLayoutManager layoutManager;
 
-    @Override
-    public void initializeView() {
+    @Override public void initializeView() {
         super.initializeView();
         initializeDagger();
         initializePresenter();
@@ -72,7 +70,7 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
 
     @Override
     public void showPhotoDetail(String details) {
-        Toast.makeText(this, details, Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this,DetailPostActivity.class));
     }
 
     @Override
@@ -104,6 +102,5 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
 
     @Override
     public void setValuesFabric() {
-
     }
 }

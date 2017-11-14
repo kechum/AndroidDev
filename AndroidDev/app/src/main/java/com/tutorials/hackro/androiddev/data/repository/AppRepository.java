@@ -27,6 +27,11 @@ public class AppRepository implements DataSourceRepository {
         return dataRemote.getListResult();
     }
 
+    @Override
+    public Observable<Object> getListComments(String id_post) {
+        return dataRemote.getListComments(id_post);
+    }
+
 
 }
 

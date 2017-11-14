@@ -12,5 +12,7 @@ public interface DataSourceRemote {
 
     Observable<ResponseRedditData> getListResult();
 
+    Observable<Object> getListComments(String id_post);
+
 
 }

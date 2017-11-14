@@ -20,14 +20,16 @@ public class DataRemote implements DataSourceRemote {
     private Retrofit retrofit;
     private AssetsPropertyReader assetsPropertyReader;
 
-    @Inject
-    public DataRemote(@NonNull Retrofit retrofit, @NonNull AssetsPropertyReader assetsPropertyReader) {
+    @Inject public DataRemote(@NonNull Retrofit retrofit, @NonNull AssetsPropertyReader assetsPropertyReader) {
         this.retrofit = retrofit;
         this.assetsPropertyReader = assetsPropertyReader;
     }
 
-    @Override
-    public Observable<ResponseRedditData> getListResult() {
+    @Override public Observable<ResponseRedditData> getListResult() {
         return retrofit.create(RetrofitServicesJsonPlaceHolder.class).getListResult(assetsPropertyReader.getProperties(BuildConfig.PROPERTIES_FILE).getProperty(BuildConfig.NUMBER_RESULT));
+    }
+
+    @Override public Observable<Object> getListComments(String id_post) {
+        return retrofit.create(RetrofitServicesJsonPlaceHolder.class).getListComments(id_post);
     }
 }

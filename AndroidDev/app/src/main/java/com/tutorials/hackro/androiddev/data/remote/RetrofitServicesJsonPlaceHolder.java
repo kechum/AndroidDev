@@ -1,5 +1,7 @@
 package com.tutorials.hackro.androiddev.data.remote;
 
+import android.os.Build;
+
 import com.tutorials.hackro.androiddev.BuildConfig;
 import com.tutorials.hackro.androiddev.data.model.ResponseRedditData;
 
@@ -18,5 +20,8 @@ public interface RetrofitServicesJsonPlaceHolder {
      */
     @GET(BuildConfig.BASE_API_TYPE)
     Observable<ResponseRedditData> getListResult(@Query(BuildConfig.API_PARAMETER) String result);
+
+    @GET(BuildConfig.BASE_API_TYPE+ BuildConfig.API_ENDPOINT_COMMENTS)
+    Observable<Object> getListComments(@Query(BuildConfig.API_PARAMETER_ID_POST) String id_post);
 
 }
