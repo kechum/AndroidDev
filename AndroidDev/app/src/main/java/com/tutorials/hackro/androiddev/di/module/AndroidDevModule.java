@@ -8,13 +8,8 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.tutorials.hackro.androiddev.BuildConfig;
-import com.tutorials.hackro.androiddev.data.remote.mapper.MapperResponseUserFake;
 import com.tutorials.hackro.androiddev.presentation.Utils.AssetsPropertyReader;
-import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponsePhotoPresentation;
-import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseUserFakePresentation;
-import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseUserPresentation;
-
-import java.util.concurrent.TimeUnit;
+import com.tutorials.hackro.androiddev.presentation.entity.ArticleDetails;
 
 import javax.inject.Singleton;
 
@@ -22,6 +17,7 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -31,58 +27,60 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  * Created by hackro on 3/08/17.
  */
 
-@Module public class AndroidDevModule {
-
+@Module
+public class AndroidDevModule {
 
 
     /**
-     *
      * @param application
      * @return
      */
     @Provides
     @Singleton
-    SharedPreferences provideSharedPreferences(Application application){
+    SharedPreferences provideSharedPreferences(Application application) {
         return PreferenceManager.getDefaultSharedPreferences(application);
     }
 
     /**
-     *
      * @param application
      * @return
      */
     @Provides
     @Singleton
-    Cache provideHtttpCache(Application application){
+    Cache provideHtttpCache(Application application) {
         int cacheSize = 10 * 1024 * 1024;
-        return new Cache(application.getCacheDir(),cacheSize);
+        return new Cache(application.getCacheDir(), cacheSize);
     }
 
     /**
-     *
      * @param cache
      * @return
      */
     @Provides
     @Singleton
-    OkHttpClient provideOkhttpCLient(Cache cache){
-        //OkHttpClient.Builder client = new OkHttpClient.Builder();
+    OkHttpClient provideHttpLoggingInterceptor(Cache cache) {
 
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS).build();
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+// set your desired log level
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+// add your other interceptors …
+
+// add logging as last interceptor
+        httpClient.addInterceptor(logging);
+
 
         //client.cache(cache);
-        return client;
+        return httpClient.build();
     }
 
     /**
-     *
      * @return
      */
     @Provides
     @Singleton
-    Gson provideGson(){
+    Gson provideGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setLenient();
         gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
@@ -90,14 +88,13 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
     }
 
     /**
-     *
      * @param gson
      * @param okHttpClient
      * @return
      */
     @Provides
     @Singleton
-    Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient){
+    Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -108,26 +105,17 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
     }
 
 
-    @Provides
-    @Singleton
-    MapperResponseUserFake provideMapperResponseUserFake(){
-        return new MapperResponseUserFake();
-    }
-
-    @Provides
-    @Singleton
-    MapperResponseUserFakePresentation provideMapperResponseUserFakePresentation(){
-        return new MapperResponseUserFakePresentation();
-    }
-
-
     @Singleton
     @Provides
-    AssetsPropertyReader providesAssetsPropertyReader(Application application){
+    AssetsPropertyReader providesAssetsPropertyReader(Application application) {
         return new AssetsPropertyReader(application);
     }
 
 
-
+    @Singleton
+    @Provides
+    ArticleDetails providesArticleDetails(){
+        return new ArticleDetails();
+    }
 
 }

@@ -9,9 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.tutorials.hackro.androiddev.R;
-import com.tutorials.hackro.androiddev.presentation.view.entity.ResponsePhotoPresentation;
-import com.tutorials.hackro.androiddev.presentation.view.entity.ResponseUserFakePresentation;
-import com.tutorials.hackro.androiddev.presentation.view.entity.userfake.ResultPresentation;
+import com.tutorials.hackro.androiddev.data.model.reddit.ChildLayerData;
 import com.tutorials.hackro.androiddev.presentation.view.presenter.MainPresenter;
 
 import java.util.ArrayList;
@@ -23,34 +21,37 @@ import java.util.List;
 
 public class PhotosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<ResultPresentation> listResult;
+    private List<ChildLayerData> listResult;
     private MainPresenter presenter;
-    private Context  context;
+    private Context context;
 
 
-    public PhotosAdapter(MainPresenter presenter,Context context) {
+    public PhotosAdapter(MainPresenter presenter, Context context) {
         listResult = new ArrayList<>();
         this.presenter = presenter;
         this.context = context;
     }
 
-    @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_photo,parent,false);
-        return new PhotosViewHolder(view,presenter);
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_photo, parent, false);
+        return new PhotosViewHolder(view, presenter);
     }
 
-    @Override public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         PhotosViewHolder photoHolder = (PhotosViewHolder) holder;
         photoHolder.renderView(listResult.get(position));
         setAnimation(((PhotosViewHolder) holder).cardview);
 
     }
 
-    @Override public int getItemCount() {
+    @Override
+    public int getItemCount() {
         return listResult.size();
     }
 
-    public void setListResult(List<ResultPresentation> listResult) {
+    public void setListResult(List<ChildLayerData> listResult) {
         this.listResult = listResult;
     }
 

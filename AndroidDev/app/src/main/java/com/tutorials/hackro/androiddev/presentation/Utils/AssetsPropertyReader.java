@@ -16,7 +16,8 @@ public class AssetsPropertyReader {
     private Context context;
     private Properties properties;
 
-    @Inject public AssetsPropertyReader(Application application) {
+    @Inject
+    public AssetsPropertyReader(Application application) {
         this.context = application.getApplicationContext();
         properties = new Properties();
     }
@@ -27,7 +28,7 @@ public class AssetsPropertyReader {
             InputStream inputStream = assetManager.open(FileName);
             properties.load(inputStream);
         } catch (IOException e) {
-            Log.e("AssetsPropertyReader",e.toString());
+            Log.e("AssetsPropertyReader", e.toString());
         }
         return properties;
 

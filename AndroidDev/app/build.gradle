@@ -22,9 +22,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "BASE_URL", "\"https://randomuser.me/\""
-        buildConfigField "String", "BASE_API", "\"api/\""
-        buildConfigField "String", "API_PARAMETER", "\"results\""
+        buildConfigField "String", "BASE_URL", "\"https://www.reddit.com/r/androiddev/\""
+        buildConfigField "String", "BASE_API_TYPE", "\".json\""
+        buildConfigField "String", "API_PARAMETER", "\"limit\""
+        buildConfigField "String", "API_ENDPOINT_COMMENTS", "\"comments/\""
+        buildConfigField "String", "API_PARAMETER_ID_POST", "\"id_post\""
         buildConfigField "String", "PROPERTIES_FILE", "\"valuesAndroidDev.properties\""
         signingConfig signingConfigs.TutorialsHackro
     }
@@ -78,6 +80,9 @@ dependencies {
     compile recyclerDependencies.gridlayout
     compile recyclerDependencies.recycler
     compile(othersDependencies.crashlytics) { transitive = true; }
+    compile squareupDependencies.interceptor
+
+    compile 'com.android.support:design:24.0.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'

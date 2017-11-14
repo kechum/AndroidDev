@@ -1,18 +1,14 @@
 package com.tutorials.hackro.androiddev.presentation.view.presenter;
 
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
+import com.tutorials.hackro.androiddev.data.model.ResponseRedditData;
+import com.tutorials.hackro.androiddev.data.model.reddit.ChildLayerData;
 import com.tutorials.hackro.androiddev.domain.DefaultSubscriber;
-import com.tutorials.hackro.androiddev.domain.model.ResponseUserFakeDomain;
 import com.tutorials.hackro.androiddev.domain.usecase.GetListResult;
-import com.tutorials.hackro.androiddev.presentation.mapper.MapperResponseUserFakePresentation;
-import com.tutorials.hackro.androiddev.presentation.view.entity.ResponsePhotoPresentation;
-import com.tutorials.hackro.androiddev.presentation.view.entity.ResponseUserFakePresentation;
-import com.tutorials.hackro.androiddev.presentation.view.entity.ResponseUserPresentation;
-import com.tutorials.hackro.androiddev.presentation.view.entity.userfake.ResultPresentation;
+import com.tutorials.hackro.androiddev.presentation.entity.ArticleDetails;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,27 +17,28 @@ import javax.inject.Inject;
  * Created by hackro on 3/08/17.
  */
 
-public class MainPresenter extends  Presenter<MainPresenter.View>{
+public class MainPresenter extends Presenter<MainPresenter.View> {
 
 
     private GetListResult getListResult;
-    private MapperResponseUserFakePresentation mapperResponseUserFake;
+    private ArticleDetails articleDetails;
 
-    @Inject
-    public MainPresenter(@NonNull GetListResult getListResult,MapperResponseUserFakePresentation mapperResponseUserFake){
+
+    @Inject public MainPresenter(@NonNull GetListResult getListResult,@NonNull ArticleDetails articleDetails) {
         this.getListResult = getListResult;
-        this.mapperResponseUserFake = mapperResponseUserFake;
+        this.articleDetails = articleDetails;
     }
 
 
     @Override
     public void initialize() {
         super.initialize();
+        getView().hideToolbar();
         listResult();
     }
 
 
-    private class GetListResultObservable extends DefaultSubscriber<ResponseUserFakeDomain>{
+    private class GetListResultObservable extends DefaultSubscriber<ResponseRedditData> {
         @Override
         public void onCompleted() {
             super.onCompleted();
@@ -53,10 +50,17 @@ public class MainPresenter extends  Presenter<MainPresenter.View>{
         }
 
         @Override
-        public void onNext(ResponseUserFakeDomain userFakeDomains) {
-            super.onNext(userFakeDomains);
-            ResponseUserFakePresentation listUsers = mapperResponseUserFake.map(userFakeDomains);
-            getView().showListResult(listUsers.getResults());
+        public void onNext(ResponseRedditData responseRedditData) {
+            super.onNext(responseRedditData);
+
+            List<ChildLayerData> listChild = new ArrayList<>();
+
+            for (ChildLayerData child : responseRedditData.getData().getChildren()) {
+                // if (child.getData().getPreview()!=null && child.getData().getThumbnail()!=null && !child.getData().getThumbnail().equals(""))
+                listChild.add(child);
+            }
+
+            getView().showListResult(listChild);
         }
     }
 
@@ -65,14 +69,26 @@ public class MainPresenter extends  Presenter<MainPresenter.View>{
     }
 
 
-
-    public void onItemOnClick(ResultPresentation responseUserFakePresentation) {
+    public void onItemOnClick(ChildLayerData responseUserFakePresentation) {
+        setValuesArticle(responseUserFakePresentation);
         getView().showPhotoDetail(responseUserFakePresentation.toString());
     }
 
-    public interface View extends Presenter.View{
+    private void setValuesArticle(ChildLayerData childLayerData) {
+        articleDetails.setComments(String.valueOf(childLayerData.getData().getNumComments()));
+        articleDetails.setTitle(childLayerData.getData().getTitle());
+        articleDetails.setId_post(childLayerData.getData().getSubredditId());
+        articleDetails.setUrlPicture(childLayerData.getData().getThumbnail());
+        articleDetails.setScore(String.valueOf(childLayerData.getData().getScore()));
+    }
+
+
+    public interface View extends Presenter.View {
         void showPhotoDetail(String details);
-        void showListResult(List<ResultPresentation> listUsers);
+
+        void showListResult(List<ChildLayerData> listUsers);
+
+        void hideToolbar();
     }
 
 

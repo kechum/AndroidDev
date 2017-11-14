@@ -12,9 +12,10 @@ import io.fabric.sdk.android.Fabric;
  * Created by hackro on 3/08/17.
  */
 
-public abstract class BaseActivity extends AppCompatActivity{
+public abstract class BaseActivity extends AppCompatActivity {
 
-    @Override public void onCreate(Bundle savedInstanceState) {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         initializeView();
@@ -28,10 +29,12 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     protected abstract int getLayoutId();
 
-    public void initFabric(){ Fabric.with(this, new Crashlytics());}
+    public void initFabric() {
+        Fabric.with(this, new Crashlytics());
+    }
 
 
-    public void bindView(){
+    public void bindView() {
         ButterKnife.bind(this);
     }
 

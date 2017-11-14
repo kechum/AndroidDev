@@ -1,10 +1,7 @@
 package com.tutorials.hackro.androiddev.data.repository;
 
-import com.tutorials.hackro.androiddev.domain.model.ResponsePhotoDomain;
-import com.tutorials.hackro.androiddev.domain.model.ResponseUserDomain;
-import com.tutorials.hackro.androiddev.domain.model.ResponseUserFakeDomain;
-
-import java.util.List;
+import com.google.gson.internal.ObjectConstructor;
+import com.tutorials.hackro.androiddev.data.model.ResponseRedditData;
 
 import rx.Observable;
 
@@ -14,6 +11,7 @@ import rx.Observable;
 // this interface is use in AppRepository
 public interface DataSourceRepository {
 
-    Observable<ResponseUserFakeDomain> getListResult();
+    Observable<ResponseRedditData> getListResult();
+    Observable<Object> getListComments(String id_post);
 
 }
