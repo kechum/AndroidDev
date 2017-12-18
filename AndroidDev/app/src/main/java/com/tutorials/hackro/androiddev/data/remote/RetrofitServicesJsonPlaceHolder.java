@@ -18,10 +18,10 @@ public interface RetrofitServicesJsonPlaceHolder {
     /**
      * @return
      */
-    @GET(BuildConfig.BASE_API_TYPE)
-    Observable<ResponseRedditData> getListResult(@Query(BuildConfig.API_PARAMETER) String result);
+    @GET(BuildConfig.API_ENDPOINT_REDDIT)
+    Observable<ResponseRedditData> getListResult();
 
-    @GET(BuildConfig.BASE_API_TYPE+ BuildConfig.API_ENDPOINT_COMMENTS)
+    @GET(BuildConfig.BASE_API_TYPE+ BuildConfig.API_PARAMETER_ID_POST)
     Observable<Object> getListComments(@Query(BuildConfig.API_PARAMETER_ID_POST) String id_post);
 
 }

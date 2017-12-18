@@ -55,12 +55,12 @@ public class MainPresenter extends Presenter<MainPresenter.View> {
 
             List<ChildLayerData> listChild = new ArrayList<>();
 
-            for (ChildLayerData child : responseRedditData.getData().getChildren()) {
+            /*for (ChildLayerData child : responseRedditData.getData().getChildren()) {
                 // if (child.getData().getPreview()!=null && child.getData().getThumbnail()!=null && !child.getData().getThumbnail().equals(""))
                 listChild.add(child);
             }
 
-            getView().showListResult(listChild);
+            getView().showListResult(listChild);*/
         }
     }
 

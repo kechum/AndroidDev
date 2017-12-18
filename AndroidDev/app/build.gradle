@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'kotlin-android'
+//apply plugin: 'com.neenbedankt.android-apt'
+//apply plugin: 'me.tatarka.retrolambda'
 
 
 
@@ -10,11 +11,11 @@ android {
             keyAlias 'TutorialsHackro'
             keyPassword 'TutorialsHackro'
             storePassword 'TutorialsHackro'
-            storeFile file('/Users/macbookpro/Desktop/TutorialsHackro.jks')
+            storeFile file('../TutorialsHackro.jks')
         }
     }
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.tutorials.hackro.androiddev"
         minSdkVersion 19
@@ -22,11 +23,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "BASE_URL", "\"https://www.reddit.com/r/androiddev/\""
+        buildConfigField "String", "BASE_URL", "\"https://androidtutorials.herokuapp.com/\""
         buildConfigField "String", "BASE_API_TYPE", "\".json\""
         buildConfigField "String", "API_PARAMETER", "\"limit\""
-        buildConfigField "String", "API_ENDPOINT_COMMENTS", "\"comments/\""
-        buildConfigField "String", "API_PARAMETER_ID_POST", "\"id_post\""
+        buildConfigField "String", "API_ENDPOINT_REDDIT", "\"getPostReddit/\""
+        buildConfigField "String", "API_PARAMETER_ID_POST", "\"getPostReddit/\""
+
         buildConfigField "String", "PROPERTIES_FILE", "\"valuesAndroidDev.properties\""
         signingConfig signingConfigs.TutorialsHackro
     }
@@ -57,6 +59,7 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+
     productFlavors {
     }
 }
@@ -86,8 +89,12 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-    apt 'com.jakewharton:butterknife-compiler:8.2.1'
-    apt 'com.google.dagger:dagger-compiler:2.9'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.2.1'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.9'
     provided 'javax.annotation:jsr250-api:1.0'
     provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
